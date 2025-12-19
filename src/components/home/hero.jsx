@@ -4,25 +4,28 @@ import hero2 from "../../assets/hero2.jpg";
 
 export default function Hero() {
   return (
-    <section className="pt-24 bg-[#F0F4FA]">
-      <div className="container mx-auto px-6">
+    <section className="pt-16 md:pt-24 bg-[#F0F4FA] overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* === Text Section === */}
         <div className="flex flex-col md:flex-row justify-between items-start mb-10">
+          
           {/* Left Column */}
-          <div className="md:w-1/2 mb-6 md:mb-0 pt-10">
+          <div className="md:w-1/2 mb-6 md:mb-0">
             <p className="text-blue-600 font-semibold uppercase mb-2">
               Medical Consulting Services
             </p>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Your compass to a <br/> healthy life
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
+              Your compass to a healthy life
             </h1>
           </div>
 
           {/* Right Column */}
-          <div className="md:w-1/2 md:pl-8 pt-20">
-            <p className="mb-6 text-gray-600">
-              Connecting people or medically challenged individuals to the right <br/>hospitals both locally and internationally to receive the best <br/>possible care geared towards restoring health. 
+          <div className="md:w-1/2 md:pl-8 mt-4 md:mt-0">
+            <p className="mb-6 text-gray-600 text-sm sm:text-base">
+              Connecting people or medically challenged individuals to the right
+              hospitals both locally and internationally to receive the best
+              possible care geared towards restoring health.
             </p>
             <button className="bg-[#137EE8] text-white px-6 py-3 rounded-md hover:bg-blue-700 transition">
               Book a consultation
@@ -31,17 +34,17 @@ export default function Hero() {
         </div>
 
         {/* === Image Section === */}
-        <div className="w-full  mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 pb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-16">
           <img
             src={hero1}
             alt="Doctors consulting patients"
-            className="rounded-lg shadow-md object-cover w-full h-96 sm:h-[450px] md:h-[550px] lg:h-[600px]"
+            className="rounded-lg shadow-md object-cover w-full h-64 sm:h-80 md:h-[450px]"
             loading="lazy"
           />
           <img
             src={hero2}
             alt="Medical team discussion"
-            className="rounded-lg shadow-md object-cover w-full h-96 sm:h-[450px] md:h-[550px] lg:h-[600px]"
+            className="rounded-lg shadow-md object-cover w-full h-64 sm:h-80 md:h-[450px]"
             loading="lazy"
           />
         </div>
@@ -49,4 +52,3 @@ export default function Hero() {
     </section>
   );
 }
-
