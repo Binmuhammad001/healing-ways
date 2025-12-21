@@ -26,7 +26,7 @@ export default function Section8() {
             <img
               src={Minor}
               alt="Healthcare professional"
-              className="rounded-xl w-48 sm:w-56 md:w-64 lg:w-72 h-48 sm:h-56 md:h-72 lg:h-80 object-cover shadow-md"
+              className="rounded-xl w-56 sm:w-64 md:w-72 lg:w-80 h-56 sm:h-64 md:h-72 lg:h-80 object-cover shadow-md"
             />
           </div>
 
