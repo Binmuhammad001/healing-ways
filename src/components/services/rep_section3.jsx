@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Img from "../../assets/rep_img2.jpg";
 
@@ -38,13 +38,13 @@ export default function OtherServicesCarousel() {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
       setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
     }
   };
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = 300;
+      const scrollAmount = scrollRef.current.clientWidth * 0.7;
       const newScrollLeft =
         direction === "left"
           ? scrollRef.current.scrollLeft - scrollAmount
@@ -54,13 +54,19 @@ export default function OtherServicesCarousel() {
         left: newScrollLeft,
         behavior: "smooth",
       });
-
-      setTimeout(checkScrollability, 300);
     }
   };
 
+  // Update scrollability on resize
+  useEffect(() => {
+    const handleResize = () => checkScrollability();
+    window.addEventListener("resize", handleResize);
+    checkScrollability();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <section className="bg-[#F7F3F0] py-16 md:py-10 sm:py-20">
+    <section className="bg-[#F7F3F0] py-16 md:py-20">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start justify-between mb-8">
@@ -68,7 +74,7 @@ export default function OtherServicesCarousel() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Other services
             </h2>
-            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+            <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
               We are committed to making your medical tourism journey a success,
               from initial consultation to post-treatment follow-up. Let us help
               you achieve your goals.
@@ -112,7 +118,7 @@ export default function OtherServicesCarousel() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="flex-shrink-0 snap-center w-[80%] xs:w-[250px] sm:w-[280px] md:w-[320px] lg:w-[350px] group"
+              className="flex-shrink-0 snap-center w-[80%] sm:w-[280px] md:w-[320px] lg:w-[350px] group"
             >
               {/* Image */}
               <div className="relative overflow-hidden rounded-xl mb-3 sm:mb-4 h-48 sm:h-56 md:h-64">
