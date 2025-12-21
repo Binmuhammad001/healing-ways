@@ -3,7 +3,7 @@ import Hero from '../../assets/hero.jpg';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center justify-start overflow-hidden">
+    <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
@@ -21,7 +21,7 @@ export default function HeroSection() {
           <p className="text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed py-2">
             Medical tourism
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-snug md:leading-tight text-white">
             We use half the space we build
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed mb-6">
