@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
-import img from '../../assets/med_img.jpg'
+import img from '../../assets/med_img.jpg';
 
 export default function HotelListingsSection() {
   const hotels = [
@@ -38,16 +38,16 @@ export default function HotelListingsSection() {
     <section className="bg-white py-10 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 md:px-12 max-w-7xl">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-          
+
           {/* Left side - Hotel Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 flex-1">
             {hotels.map((hotel, index) => (
               <div 
                 key={index}
-                className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full"
               >
                 {/* Hotel Image */}
-                <div className="relative h-40 sm:h-48 md:h-52 overflow-hidden">
+                <div className="relative h-40 sm:h-48 md:h-52 lg:h-56 overflow-hidden">
                   <img 
                     src={hotel.image}
                     alt={hotel.name}
@@ -56,14 +56,14 @@ export default function HotelListingsSection() {
                 </div>
 
                 {/* Hotel Info */}
-                <div className="p-3 sm:p-4">
+                <div className="p-3 sm:p-4 flex flex-col justify-between flex-grow">
                   <div className="flex items-start justify-between mb-1 sm:mb-2">
                     <h3 className="text-sm sm:text-base font-semibold text-gray-900">
                       {hotel.name}
                     </h3>
                     <div className="text-right">
                       <p className="text-blue-600 font-bold text-sm sm:text-base">{hotel.price}</p>
-                      <p className="text-gray-500 text-xs">{hotel.priceLabel}</p>
+                      <p className="text-gray-500 text-xs sm:text-sm">{hotel.priceLabel}</p>
                     </div>
                   </div>
                   
@@ -77,7 +77,7 @@ export default function HotelListingsSection() {
           </div>
 
           {/* Right side - Content */}
-          <div className="flex-1 text-center lg:text-left">
+          <div className="flex-1 flex flex-col justify-center text-center lg:text-left">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-snug">
               Experience Affordable, World-Class Medical Care
             </h2>
