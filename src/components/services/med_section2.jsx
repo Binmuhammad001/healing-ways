@@ -29,10 +29,10 @@ export default function ServicesCardsSection() {
             return (
               <div 
                 key={index}
-                className="bg-[#F7F3F0] rounded-2xl p-6 sm:p-8 md:p-10 hover:shadow-lg transition-shadow duration-300 flex flex-col"
+                className="bg-[#F7F3F0] rounded-2xl p-6 sm:p-8 md:p-10 hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
               >
                 {/* Icon */}
-                <div className="bg-[#172641] rounded-full w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
+                <div className="bg-[#172641] rounded-full w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6 flex-shrink-0">
                   <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                 </div>
 
@@ -42,7 +42,7 @@ export default function ServicesCardsSection() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base flex-grow">
                   {service.description}
                 </p>
               </div>
