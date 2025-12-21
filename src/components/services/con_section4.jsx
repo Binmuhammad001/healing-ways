@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Img from "../../assets/rep_img2.jpg";
 
@@ -42,9 +42,16 @@ export default function OtherServicesCarousel() {
     }
   };
 
+  useEffect(() => {
+    checkScrollability();
+    const handleResize = () => checkScrollability();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = scrollRef.current.clientWidth * 0.8; // scroll ~80% of container width
+      const scrollAmount = scrollRef.current.clientWidth * 0.8;
       const newScrollLeft =
         direction === "left"
           ? scrollRef.current.scrollLeft - scrollAmount
@@ -55,7 +62,7 @@ export default function OtherServicesCarousel() {
         behavior: "smooth",
       });
 
-      setTimeout(checkScrollability, 300);
+      setTimeout(checkScrollability, 350);
     }
   };
 
@@ -64,8 +71,8 @@ export default function OtherServicesCarousel() {
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start justify-between mb-8">
-          <div className="max-w-2xl mb-6 sm:mb-0">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <div className="max-w-2xl mb-4 sm:mb-0">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
               Other services
             </h2>
             <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
@@ -76,7 +83,7 @@ export default function OtherServicesCarousel() {
           </div>
 
           {/* Navigation Arrows */}
-          <div className="flex gap-3 self-end sm:self-auto mt-2 sm:mt-0">
+          <div className="flex gap-3 mt-2 sm:mt-0">
             <button
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
@@ -111,10 +118,10 @@ export default function OtherServicesCarousel() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="flex-shrink-0 snap-center w-[90%] sm:w-[250px] md:w-[280px] lg:w-[320px] xl:w-[350px] group"
+              className="flex-shrink-0 snap-center w-[85%] xs:w-[220px] sm:w-[250px] md:w-[280px] lg:w-[320px] xl:w-[350px] group"
             >
               {/* Image */}
-              <div className="relative overflow-hidden rounded-xl mb-3 sm:mb-4 h-48 sm:h-56 md:h-64 lg:h-72">
+              <div className="relative overflow-hidden rounded-xl mb-3 sm:mb-4 h-44 sm:h-52 md:h-60 lg:h-64 xl:h-72">
                 <img
                   src={service.image}
                   alt={service.title}
