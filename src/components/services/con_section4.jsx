@@ -38,13 +38,13 @@ export default function OtherServicesCarousel() {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
       setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
     }
   };
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = 300;
+      const scrollAmount = scrollRef.current.clientWidth * 0.8; // scroll ~80% of container width
       const newScrollLeft =
         direction === "left"
           ? scrollRef.current.scrollLeft - scrollAmount
@@ -60,12 +60,12 @@ export default function OtherServicesCarousel() {
   };
 
   return (
-    <section className="bg-[#F7F3F0] py-16 md:py-10 sm:py-20">
+    <section className="bg-[#F7F3F0] py-12 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start justify-between mb-8">
           <div className="max-w-2xl mb-6 sm:mb-0">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               Other services
             </h2>
             <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
@@ -76,7 +76,7 @@ export default function OtherServicesCarousel() {
           </div>
 
           {/* Navigation Arrows */}
-          <div className="flex gap-3 self-end sm:self-auto">
+          <div className="flex gap-3 self-end sm:self-auto mt-2 sm:mt-0">
             <button
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
@@ -106,16 +106,15 @@ export default function OtherServicesCarousel() {
         <div
           ref={scrollRef}
           onScroll={checkScrollability}
-          className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 snap-x snap-mandatory"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4"
         >
           {services.map((service, index) => (
             <div
               key={index}
-              className="flex-shrink-0 snap-center w-[80%] xs:w-[250px] sm:w-[280px] md:w-[320px] lg:w-[350px] group"
+              className="flex-shrink-0 snap-center w-[90%] sm:w-[250px] md:w-[280px] lg:w-[320px] xl:w-[350px] group"
             >
               {/* Image */}
-              <div className="relative overflow-hidden rounded-xl mb-3 sm:mb-4 h-48 sm:h-56 md:h-64">
+              <div className="relative overflow-hidden rounded-xl mb-3 sm:mb-4 h-48 sm:h-56 md:h-64 lg:h-72">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -145,6 +144,10 @@ export default function OtherServicesCarousel() {
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </section>
