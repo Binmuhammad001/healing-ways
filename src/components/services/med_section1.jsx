@@ -49,7 +49,7 @@ export default function Section3() {
             <img
               src={Flags}
               alt="Medical consultation"
-              className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto object-cover rounded-lg"
+              className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-cover rounded-lg"
               loading="lazy"
             />
           </div>
