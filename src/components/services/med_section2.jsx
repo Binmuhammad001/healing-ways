@@ -21,28 +21,28 @@ export default function ServicesCardsSection() {
   ];
 
   return (
-    <section className="bg-white py-10">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="grid md:grid-cols-3 gap-6">
+    <section className="bg-white py-10 md:py-16">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 max-w-7xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <div 
                 key={index}
-                className="bg-[#F7F3F0] rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300"
+                className="bg-[#F7F3F0] rounded-2xl p-6 sm:p-8 md:p-10 hover:shadow-lg transition-shadow duration-300 flex flex-col"
               >
                 {/* Icon */}
-                <div className="bg-[#172641] rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                  <Icon className="w-8 h-8 text-white" />
+                <div className="bg-[#172641] rounded-full w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-4 sm:mb-6">
+                  <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
                   {service.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 leading-relaxed text-sm">
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                   {service.description}
                 </p>
               </div>
