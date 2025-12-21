@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Img from "../../assets/rep_img2.jpg";
 
@@ -34,33 +34,34 @@ export default function OtherServicesCarousel() {
     },
   ];
 
+  useEffect(() => {
+    const handleResize = () => checkScrollability();
+    window.addEventListener("resize", handleResize);
+    checkScrollability();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const checkScrollability = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
       setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
     }
   };
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = 300;
-      const newScrollLeft =
-        direction === "left"
-          ? scrollRef.current.scrollLeft - scrollAmount
-          : scrollRef.current.scrollLeft + scrollAmount;
-
-      scrollRef.current.scrollTo({
-        left: newScrollLeft,
+      const scrollAmount = scrollRef.current.clientWidth * 0.8;
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
-
       setTimeout(checkScrollability, 300);
     }
   };
 
   return (
-    <section className="bg-[#F7F3F0] py-16 md:py-10 sm:py-20">
+    <section className="bg-[#F7F3F0] py-16 md:py-20">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start justify-between mb-8">
@@ -76,7 +77,7 @@ export default function OtherServicesCarousel() {
           </div>
 
           {/* Navigation Arrows */}
-          <div className="flex gap-3 self-end sm:self-auto">
+          <div className="flex gap-3 self-end sm:self-auto mt-2 sm:mt-0">
             <button
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
@@ -106,16 +107,15 @@ export default function OtherServicesCarousel() {
         <div
           ref={scrollRef}
           onScroll={checkScrollability}
-          className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 snap-x snap-mandatory"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4"
         >
           {services.map((service, index) => (
             <div
               key={index}
-              className="flex-shrink-0 snap-center w-[80%] xs:w-[250px] sm:w-[280px] md:w-[320px] lg:w-[350px] group"
+              className="flex-shrink-0 snap-center w-[85%] xs:w-[250px] sm:w-[280px] md:w-[320px] lg:w-[350px] group"
             >
               {/* Image */}
-              <div className="relative overflow-hidden rounded-xl mb-3 sm:mb-4 h-48 sm:h-56 md:h-64">
+              <div className="relative overflow-hidden rounded-xl mb-3 sm:mb-4 h-48 sm:h-56 md:h-64 lg:h-72">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -145,6 +145,10 @@ export default function OtherServicesCarousel() {
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </section>
