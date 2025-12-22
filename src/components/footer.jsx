@@ -74,11 +74,12 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Subscribe</h4>
             <div className="flex">
-              <input
+             <input
                 type="email"
                 placeholder="Get product updates"
-                className="flex-1 px-4 py-2 rounded-l-md text-gray-900 focus:outline-none text-sm"
+                className="flex-1 bg-white px-4 py-2 rounded-l-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
               />
+
               <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-md transition">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
