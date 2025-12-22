@@ -16,7 +16,7 @@ export default function Hero() {
   Medical Consulting Services
 </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
-              Your compass to a healthy life
+              Your compass to healthy life
             </h1>
           </div>
 
