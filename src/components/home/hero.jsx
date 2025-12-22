@@ -15,9 +15,11 @@ export default function Hero() {
            <p className="font-semibold uppercase mb-2" style={{ color: '#137EE8' }}>
   Medical Consulting Services
 </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
-  Your compass to <br /> healthy living
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
+  Your compass to <br />
+  <span className="pt-4 inline-block">healthy living</span>
 </h1>
+
 
           </div>
 
