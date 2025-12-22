@@ -35,39 +35,31 @@ export default function OtherServicesCarousel() {
   ];
 
   const checkScrollability = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
-    }
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 2);
   };
 
   const scroll = (direction) => {
-    if (scrollRef.current) {
-      const scrollAmount = scrollRef.current.clientWidth * 0.7;
-      const newScrollLeft =
-        direction === "left"
-          ? scrollRef.current.scrollLeft - scrollAmount
-          : scrollRef.current.scrollLeft + scrollAmount;
-
-      scrollRef.current.scrollTo({
-        left: newScrollLeft,
-        behavior: "smooth",
-      });
-    }
+    if (!scrollRef.current) return;
+    const scrollAmount = scrollRef.current.clientWidth * 0.8;
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
   };
 
-  // Update scrollability on resize
   useEffect(() => {
-    const handleResize = () => checkScrollability();
-    window.addEventListener("resize", handleResize);
     checkScrollability();
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("resize", checkScrollability);
+    return () => window.removeEventListener("resize", checkScrollability);
   }, []);
 
   return (
-    <section className="bg-[#F7F3F0] py-16 md:py-20">
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
+    <section className="bg-[#F7F3F0] py-16 md:py-20 overflow-x-hidden">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
+
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start justify-between mb-8">
           <div className="max-w-2xl mb-6 sm:mb-0">
@@ -76,34 +68,34 @@ export default function OtherServicesCarousel() {
             </h2>
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
               We are committed to making your medical tourism journey a success,
-              from initial consultation to post-treatment follow-up. Let us help
-              you achieve your goals.
+              from initial consultation to post-treatment follow-up.
             </p>
           </div>
 
-          {/* Navigation Arrows */}
+          {/* Arrows */}
           <div className="flex gap-3 self-end sm:self-auto">
             <button
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
-              className={`p-3 rounded-full transition-all ${
+              className={`p-3 rounded-full ${
                 canScrollLeft
-                  ? "bg-gray-200 hover:bg-gray-300 text-gray-900"
+                  ? "bg-gray-200 hover:bg-gray-300"
                   : "bg-gray-100 text-gray-400 cursor-not-allowed"
               }`}
             >
-              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
+
             <button
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
-              className={`p-3 rounded-full transition-all ${
+              className={`p-3 rounded-full ${
                 canScrollRight
-                  ? "bg-gray-200 hover:bg-gray-300 text-gray-900"
+                  ? "bg-gray-200 hover:bg-gray-300"
                   : "bg-gray-100 text-gray-400 cursor-not-allowed"
               }`}
             >
-              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -112,47 +104,43 @@ export default function OtherServicesCarousel() {
         <div
           ref={scrollRef}
           onScroll={checkScrollability}
-          className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 snap-x snap-mandatory"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4"
+          style={{ scrollbarWidth: "none" }}
         >
           {services.map((service, index) => (
             <div
               key={index}
-              className="flex-shrink-0 snap-center w-[80%] sm:w-[280px] md:w-[320px] lg:w-[350px] group"
+              className="
+                flex-shrink-0 snap-center
+                w-[85vw] max-w-[320px]
+                sm:w-[280px]
+                md:w-[320px]
+                lg:w-[350px]
+              "
             >
-              {/* Image */}
-              <div className="relative overflow-hidden rounded-xl mb-3 sm:mb-4 h-48 sm:h-56 md:h-64">
+              <div className="overflow-hidden rounded-xl mb-3 h-48 sm:h-56 md:h-64">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
 
-              {/* Content */}
-              <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">
+              <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-2">
                 {service.title}
               </h3>
+
               <p className="text-gray-600 text-sm sm:text-base mb-3 leading-relaxed">
                 {service.description}
               </p>
-              <a
-                href="#"
-                className="text-blue-600 hover:text-blue-700 font-medium text-sm inline-flex items-center gap-1 group"
-              >
-                Learn more
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+
+              <a className="text-blue-600 text-sm font-medium inline-flex items-center gap-1">
+                Learn more <ChevronRight className="w-4 h-4" />
               </a>
             </div>
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 }
