@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="bg-[#172641] text-white py-12 px-4 w-full">
       <div className="w-full px-4">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 m-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 m-8">
           
           {/* Company Info */}
           <div>
