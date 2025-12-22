@@ -12,7 +12,7 @@ export default function Hero() {
           
           {/* Left Column */}
           <div className="md:w-1/2 mb-6 md:mb-0">
-            <p className="text-[#137EE8]-600 font-semibold uppercase mb-2">
+            <p className="text-blue-700 font-semibold uppercase mb-2">
               Medical Consulting Services
             </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
