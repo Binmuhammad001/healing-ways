@@ -33,9 +33,12 @@ export default function Section3() {
             </h2>
 
             <p className="text-gray-700 text-sm sm:text-base mb-8">
-          We are committed to making your medical tourism journey a success,<br />
-          from initial consultation to post-treatment follow-up.
-        </p>
+  We are committed to making your medical tourism journey a success,
+  <span className="block">
+    from initial consultation to post-treatment follow-up.
+  </span>
+</p>
+
 
 
             {/* Benefits List */}
