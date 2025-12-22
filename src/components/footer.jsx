@@ -89,7 +89,7 @@ export default function Footer() {
 
             {/* Copyright */}
             <p className="text-gray-400 text-sm">
-              © 2024 All rights reserved
+              © 2025 All rights reserved
             </p>
 
           </div>
