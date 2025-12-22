@@ -1,48 +1,52 @@
-import { useState } from "react";
-import Logo from "../assets/logo.svg";
+import React, { useState } from 'react';
+import { Linkedin, Facebook, Twitter, ArrowRight } from 'lucide-react';
 
+const Footer = () => {
+  const [email, setEmail] = useState('');
 
-export default function Footer() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Email submitted:', email);
+    // Add your email submission logic here
+  };
+
   return (
-    <footer className="bg-[#172641] text-white py-12 px-4 w-full">
-      <div className="w-full px-4">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          
-          {/* Company Info */}
-          <div>
-            <div className="flex items-center mb-4">
-              <img src={Logo} alt="Healing Waves logo" className="w-40 h-auto filter invert brightness-0 mr-2" />
-            </div>
-
-
-            <p className="text-gray-300 text-sm leading-relaxed mb-4">
+    <footer className="bg-[#1a2942] text-white">
+      <div className="max-w-7xl mx-auto px-8 py-16">
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Brand Section */}
+          <div className="lg:col-span-1">
+            <h2 className="text-2xl font-light tracking-[0.3em] mb-6">
+              HEALING WAYS
+            </h2>
+            <p className="text-gray-300 text-sm leading-relaxed">
               Connecting people or medically challenged individuals to the right hospitals both locally and internationally to receive the best possible care geared towards restoring health.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-medium mb-6">Quick Links</h3>
+            <ul className="space-y-3">
               <li>
-                <a href="#testimonial" className="text-gray-300 hover:text-white transition text-sm">
+                <a href="#testimonial" className="text-gray-300 text-sm hover:text-white transition-colors">
                   Testimonial
                 </a>
               </li>
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white transition text-sm">
+                <a href="#services" className="text-gray-300 text-sm hover:text-white transition-colors">
                   Services
                 </a>
               </li>
               <li>
-                <a href="#aboutus" className="text-gray-300 hover:text-white transition text-sm">
-                  About Us
+                <a href="#about" className="text-gray-300 text-sm hover:text-white transition-colors">
+                  About us
                 </a>
               </li>
               <li>
-                <a href="#contactus" className="text-gray-300 hover:text-white transition text-sm">
-                  Contact Us
+                <a href="#contact" className="text-gray-300 text-sm hover:text-white transition-colors">
+                  Contact us
                 </a>
               </li>
             </ul>
@@ -50,20 +54,20 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-medium mb-6">Legal</h3>
+            <ul className="space-y-3">
               <li>
-                <a href="#privacy" className="text-gray-300 hover:text-white transition text-sm">
+                <a href="#privacy" className="text-gray-300 text-sm hover:text-white transition-colors">
                   Privacy policy
                 </a>
               </li>
               <li>
-                <a href="#terms" className="text-gray-300 hover:text-white transition text-sm">
+                <a href="#terms" className="text-gray-300 text-sm hover:text-white transition-colors">
                   Terms of use
                 </a>
               </li>
               <li>
-                <a href="#Dataprotection" className="text-gray-300 hover:text-white transition text-sm">
+                <a href="#data-protection" className="text-gray-300 text-sm hover:text-white transition-colors">
                   Data protection policy
                 </a>
               </li>
@@ -72,71 +76,65 @@ export default function Footer() {
 
           {/* Subscribe */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Subscribe</h4>
-            <div className="flex">
+            <h3 className="text-lg font-medium mb-6">Subscribe</h3>
+            <form onSubmit={handleSubmit} className="flex">
               <input
                 type="email"
                 placeholder="Get product updates"
-                className="flex-1 px-4 py-2 rounded-l-md text-gray-900 focus:outline-none text-sm"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 px-4 py-3 bg-white text-gray-800 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-l"
+                required
               />
-              <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-md transition">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                </svg>
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-600 px-4 py-3 transition-colors rounded-r"
+                aria-label="Subscribe"
+              >
+                <ArrowRight className="w-5 h-5" />
               </button>
-            </div>
+            </form>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-700 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            {/* Social Icons */}
-            <div className="flex space-x-4 mb-4 md:mb-0">
+        <div className="border-t border-gray-600 mb-8"></div>
 
- <a
-                href="#linkedin"
-                className="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </a>
+        {/* Bottom Section */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Social Icons */}
+          <div className="flex gap-4">
+            <a
+              href="#linkedin"
+              className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a
+              href="#facebook"
+              className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all"
+              aria-label="Facebook"
+            >
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a
+              href="#twitter"
+              className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all"
+              aria-label="Twitter"
+            >
+              <Twitter className="w-4 h-4" />
+            </a>
+          </div>
 
-                <a
-                href="#facebook"
-                className="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                </svg>
-              </a>
-
-              <a
-                href="#twitter"
-                className="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                </svg>
-              </a>
-            
-             
-            </div>
-
-            {/* Copyright */}
-            <p className="text-gray-400 text-sm">
-              © 2025 • All rights reserved
-            </p>
+          {/* Copyright */}
+          <div className="text-gray-300 text-sm">
+            © 2025 All rights reserved
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
