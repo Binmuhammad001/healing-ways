@@ -4,10 +4,10 @@ import Logo from "../assets/logo.svg";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#172641] text-white py-12 px-4 w-full">
+    <footer className="bg-[#172641] text-white py-12 px-4 w-full m-8">
       <div className="w-full px-4">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 m-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           
           {/* Company Info */}
           <div>
