@@ -32,11 +32,10 @@ export default function Section3() {
               Healing Ways
             </h2>
 
-            <p className="text-gray-700 text-sm sm:text-base mb-8">
-              We are committed to making your medical tourism journey a success,
-              <br />
-              from initial consultation to post-treatment follow-up.
-            </p>
+            <div className="text-gray-700 text-sm sm:text-base mb-8">
+              <p>We are committed to making your medical tourism journey a success,</p>
+              <p>from initial consultation to post-treatment follow-up.</p>
+            </div>
 
             {/* Benefits List */}
             <div className="space-y-4 mb-8">
