@@ -20,6 +20,8 @@ export default function Footer() {
             </p>
           </div>
 
+          <div className="grid grid-cols-2 gap-12">
+          
           {/* Quick Links */}
           <div className="pl-8 mr-0">
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
@@ -67,6 +69,8 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+          </div>
+
           </div>
 
           {/* Subscribe */}
