@@ -52,27 +52,27 @@ export default function FAQSection() {
           </div>
 
           {/* Right Section - Accordion */}
-          <div className="space-y-3">
+          <div className="space-y-0">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-white border-b border-gray-200"
+                className="bg-white border-b border-gray-300"
               >
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex items-center justify-between py-5 px-0 text-left hover:bg-gray-50/50 transition-colors duration-200"
+                  className="w-full flex items-center justify-between py-5 px-6 text-left transition-colors duration-200"
                 >
                   <span className="text-gray-900 font-medium text-base pr-4">
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-300 ${
+                    className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform duration-300 ${
                       openIndex === index ? 'transform rotate-180' : ''
                     }`}
                   />
                 </button>
                 {openIndex === index && (
-                  <div className="pb-5 pt-0 px-0">
+                  <div className="pb-5 pt-0 px-6">
                     <p className="text-gray-600 leading-relaxed text-sm">
                       {faq.answer}
                     </p>
