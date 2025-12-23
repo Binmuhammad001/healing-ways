@@ -1,100 +1,88 @@
-import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
-export default function Section7() {
+export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
     {
-      question: "About Healing Ways",
-      answer:
-        "Healing Ways is a comprehensive medical tourism platform that connects patients with top-quality healthcare facilities both locally and internationally. We provide end-to-end support for your medical journey."
+      question: "About Healing ways",
+      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-      question: "What makes Healing Ways different from other platforms?",
-      answer:
-        "We offer personalized care coordination, transparent pricing, verified hospital partnerships, and comprehensive support services including visa processing, travel arrangements, and post-treatment follow-up."
+      question: "What makes healing different from other platforms?",
+      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-      question: "How do you ensure quality and safety?",
-      answer:
-        "Our platform stands out through accredited hospital partnerships, experienced medical professionals, and a strong focus on patient safety and care transparency."
+      question: "What makes healing different from other platforms?",
+      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-      question: "Do you provide support after treatment?",
-      answer:
-        "Yes, we provide post-treatment follow-up and continuous support to ensure a smooth recovery and positive medical experience."
+      question: "What makes healing different from other platforms?",
+      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      question: "What makes healing different from other platforms?",
+      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     }
   ];
 
-  const toggleFAQ = (index) => {
+  const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className="bg-[#F7F3F0] py-16 md:py-20 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-
-          {/* Left - Header */}
-          <div>
-            <p className="text-blue-600 font-semibold mb-3 uppercase tracking-wide text-sm">
-              Support
+    <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+          {/* Left Section */}
+          <div className="lg:pr-8">
+            <p className="text-blue-600 font-semibold text-sm uppercase tracking-wide mb-4">
+              SUPPORT
             </p>
-
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Frequently asked questions
-            </h3>
-
-            <p className="text-gray-600 text-sm sm:text-base mb-8 leading-relaxed">
-              We won’t leave you wondering — all your questions are answered
-              below.
+            </h1>
+            <p className="text-gray-600 mb-8">
+              We won't leave you wondering; all your questions - answered below.
             </p>
-
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-sm">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
               Get in touch
             </button>
           </div>
 
-          {/* Right - FAQ Accordion */}
-          <div className="bg-white p-6 rounded-xl shadow-md space-y-4">
+          {/* Right Section - Accordion */}
+          <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg border border-gray-200"
+                className="bg-white border border-gray-200 rounded-lg overflow-hidden"
               >
                 <button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 text-left bg-white hover:bg-gray-50 transition-colors rounded-lg"
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors duration-200"
                 >
-                  <span className="font-semibold text-gray-900 text-sm sm:text-base pr-4">
+                  <span className="text-gray-900 font-medium pr-4">
                     {faq.question}
                   </span>
-
                   <ChevronDown
-                    className={`w-5 h-5 text-gray-600 flex-shrink-0 transition-transform duration-200 ${
-                      openIndex === index ? "rotate-180" : ""
+                    className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform duration-200 ${
+                      openIndex === index ? 'transform rotate-180' : ''
                     }`}
                   />
                 </button>
-
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openIndex === index ? "max-h-96" : "max-h-0"
-                  }`}
-                >
-                  <div className="px-5 sm:px-6 pb-5 pt-1">
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                {openIndex === index && (
+                  <div className="px-5 pb-5 pt-0">
+                    <p className="text-gray-600 leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
-                </div>
+                )}
               </div>
             ))}
           </div>
-
         </div>
       </div>
-    </section>
+    </div>
   );
 }
