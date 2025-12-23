@@ -1,90 +1,83 @@
-import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
-    {
-      question: "About Healing ways",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      question: "What makes healing different from other platforms?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      question: "What makes healing different from other platforms?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      question: "What makes healing different from other platforms?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      question: "What makes healing different from other platforms?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    }
+    "What makes healing different from other platforms?",
+    "What makes healing different from other platforms?",
+    "What makes healing different from other platforms?",
+    "What makes healing different from other platforms?",
   ];
 
-  const toggleAccordion = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-          {/* Left Section */}
-          <div className="lg:pr-8">
-            <p className="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-4">
-              SUPPORT
+    <section className="bg-[#F8F6F2] py-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          
+          {/* Left Content */}
+          <div>
+            <p className="text-blue-600 text-sm font-semibold uppercase mb-3">
+              Support
             </p>
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Frequently asked questions
-            </h1>
-            <p className="text-gray-600 text-base mb-8 leading-relaxed">
-              We won't leave you wondering; all your questions<br />- answered below.
+            </h2>
+
+            <p className="text-gray-600 mb-8 max-w-md">
+              We won’t leave you wondering; all your questions
+              <br />
+              – answered below.
             </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 px-8 rounded-md transition-colors duration-200">
+
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md transition">
               Get in touch
             </button>
           </div>
 
-          {/* Right Section - Accordion */}
-          <div>
-            {faqs.map((faq, index) => (
+          {/* Right Accordion */}
+          <div className="space-y-4">
+            <div className="border-b pb-4">
+              <h3 className="text-gray-900 font-semibold">
+                About Healing ways
+              </h3>
+            </div>
+
+            {faqs.map((question, index) => (
               <div
                 key={index}
-                style={{ backgroundColor: '#ffffff' }}
-                className="border-b border-gray-300"
+                className="border-b pb-4 cursor-pointer"
+                onClick={() =>
+                  setOpenIndex(openIndex === index ? null : index)
+                }
               >
-                <button
-                  onClick={() => toggleAccordion(index)}
-                  style={{ backgroundColor: '#ffffff' }}
-                  className="w-full flex items-center justify-between py-5 px-6 text-left hover:bg-gray-50 transition-colors duration-200"
-                >
-                  <span className="text-gray-900 font-medium text-base pr-4">
-                    {faq.question}
-                  </span>
+                <div className="flex items-center justify-between">
+                  <p className="text-gray-900 font-medium">
+                    {question}
+                  </p>
+
                   <ChevronDown
-                    className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform duration-300 ${
-                      openIndex === index ? 'transform rotate-180' : ''
+                    className={`w-5 h-5 text-gray-600 transition-transform ${
+                      openIndex === index ? "rotate-180" : ""
                     }`}
                   />
-                </button>
+                </div>
+
                 {openIndex === index && (
-                  <div style={{ backgroundColor: '#ffffff' }} className="pb-5 pt-0 px-6">
-                    <p className="text-gray-600 leading-relaxed text-sm">
-                      {faq.answer}
-                    </p>
-                  </div>
+                  <p className="text-gray-600 mt-3 text-sm max-w-xl">
+                    Healing Ways focuses on connecting individuals with trusted
+                    medical services and wellness guidance tailored to their
+                    needs.
+                  </p>
                 )}
               </div>
             ))}
           </div>
+
         </div>
       </div>
-    </div>
+    </section>
   );
 }
