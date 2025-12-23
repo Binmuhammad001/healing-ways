@@ -4,13 +4,13 @@ import Logo from "../assets/logo.svg";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#172641] text-white py-12 px-4 w-full">
+    <footer className="bg-[#172641] text-white py-12 px-8 w-full">
       <div className="w-full px-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr] gap-8 mb-8 m-8">
           
           {/* Company Info */}
-          <div>
+          <div className="ml-8">
             <div className="flex items-center mb-4">
               <img src={Logo} alt="Healing Waves logo" className="w-40 h-auto filter invert brightness-0 mr-2" />
             </div>
@@ -21,7 +21,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="ml-8">
+          <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
