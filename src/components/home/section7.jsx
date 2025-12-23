@@ -32,7 +32,7 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5f0] py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           {/* Left Section */}
@@ -46,21 +46,23 @@ export default function FAQSection() {
             <p className="text-gray-600 text-base mb-8 leading-relaxed">
               We won't leave you wondering; all your questions<br />- answered below.
             </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 px-8 rounded-md transition-colors duration-200 shadow-sm">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 px-8 rounded-md transition-colors duration-200">
               Get in touch
             </button>
           </div>
 
           {/* Right Section - Accordion */}
-          <div className="space-y-0">
+          <div>
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-white border-b border-gray-300"
+                style={{ backgroundColor: '#ffffff' }}
+                className="border-b border-gray-300"
               >
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex items-center justify-between py-5 px-6 text-left transition-colors duration-200"
+                  style={{ backgroundColor: '#ffffff' }}
+                  className="w-full flex items-center justify-between py-5 px-6 text-left hover:bg-gray-50 transition-colors duration-200"
                 >
                   <span className="text-gray-900 font-medium text-base pr-4">
                     {faq.question}
@@ -72,7 +74,7 @@ export default function FAQSection() {
                   />
                 </button>
                 {openIndex === index && (
-                  <div className="pb-5 pt-0 px-6">
+                  <div style={{ backgroundColor: '#ffffff' }} className="pb-5 pt-0 px-6">
                     <p className="text-gray-600 leading-relaxed text-sm">
                       {faq.answer}
                     </p>
