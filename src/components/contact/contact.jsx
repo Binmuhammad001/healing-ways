@@ -29,7 +29,7 @@ export default function ContactSalesForm() {
     setMessage({ type: '', text: '' });
 
     try {
-      const response = await fetch('https://your-backend.vercel.app/api/contact', {
+      const response = await fetch('https://healingways-backend.vercel.app/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
