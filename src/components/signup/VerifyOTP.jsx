@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { authAPI } from "../services/api";
 
-
-
 export default function VerifyOTP() {
+  const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,8 +18,11 @@ export default function VerifyOTP() {
     const savedEmail = localStorage.getItem('pendingEmail');
     if (savedEmail) {
       setEmail(savedEmail);
+    } else {
+      // No pending email, redirect to registration
+      navigate('/book-consultation');
     }
-  }, []);
+  }, [navigate]);
 
   const handleOtpChange = (element, index) => {
     if (isNaN(element.value)) return false;
@@ -66,23 +69,31 @@ export default function VerifyOTP() {
     }
 
     try {
-      const response = await authAPI.verifyOTP({
-        email: email,
-        otp: otpCode
-      });
+      // ✅ FIXED: Pass email and OTP as separate parameters
+      const response = await authAPI.verifyOTP(email, otpCode);
 
       if (response.data.success) {
         // Save token and user data
         localStorage.setItem('token', response.data.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.data.user));
+        localStorage.setItem('user', JSON.stringify(response.data.data));
         localStorage.removeItem('pendingEmail');
+        localStorage.removeItem('userData');
 
-        // Redirect to consultation page
-        window.location.href = '/consultation';
+        // Show success message briefly
+        setResendSuccess(false);
+        setError("");
+        
+        // Redirect to dashboard or home
+        setTimeout(() => {
+          navigate('/dashboard'); // Change this to wherever you want
+        }, 1000);
       }
     } catch (error) {
       console.error('OTP verification error:', error);
-      setError(error.response?.data?.message || "OTP verification failed");
+      setError(
+        error.response?.data?.message || 
+        "Invalid or expired OTP. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -91,16 +102,27 @@ export default function VerifyOTP() {
   const handleResendOTP = async () => {
     setResendLoading(true);
     setResendSuccess(false);
+    setError("");
     
     try {
-      await authAPI.resendOTP({ email });
-      setResendSuccess(true);
-      // Clear OTP fields
-      setOtp(["", "", "", "", "", ""]);
-      // Focus first input
-      inputRefs.current[0].focus();
+      // ✅ FIXED: Pass email as parameter, not object
+      const response = await authAPI.resendOTP(email);
+      
+      if (response.data.success) {
+        setResendSuccess(true);
+        // Clear OTP fields
+        setOtp(["", "", "", "", "", ""]);
+        // Focus first input
+        if (inputRefs.current[0]) {
+          inputRefs.current[0].focus();
+        }
+      }
     } catch (error) {
-      setError(error.response?.data?.message || "Failed to resend OTP");
+      console.error('Resend OTP error:', error);
+      setError(
+        error.response?.data?.message || 
+        "Failed to resend OTP. Please try again."
+      );
     } finally {
       setResendLoading(false);
     }
@@ -109,14 +131,16 @@ export default function VerifyOTP() {
   return (
     <div className="min-h-screen bg-white flex flex-col justify-center px-4 py-8">
       <div className="flex flex-col items-center w-full max-w-md mx-auto">
-        {/* Progress Steps - Removed as it's not in the design reference */}
-        
         {/* Form Container */}
         <div className="w-full bg-white p-8">
-          <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">Verify email</h2>
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">
+            Verify email
+          </h2>
           <p className="text-gray-600 text-center mb-8">
-            Enter the 6 digit OTP we sent to <span className="font-semibold">{email || "hasina@gmail.com"}</span><br />
-            to proceed with your password reset process
+            Enter the 6 digit OTP we sent to{" "}
+            <span className="font-semibold">{email || "your email"}</span>
+            <br />
+            to complete your registration
           </p>
 
           {error && (
@@ -127,7 +151,7 @@ export default function VerifyOTP() {
 
           {resendSuccess && (
             <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
-              OTP has been resent successfully!
+              OTP has been resent successfully! Check your email.
             </div>
           )}
 
@@ -137,7 +161,7 @@ export default function VerifyOTP() {
               {otp.map((digit, index) => (
                 <input
                   key={index}
-                  ref={(el) => inputRefs.current[index] = el}
+                  ref={(el) => (inputRefs.current[index] = el)}
                   type="text"
                   maxLength="1"
                   value={digit}
@@ -171,6 +195,16 @@ export default function VerifyOTP() {
               {loading ? "Verifying..." : "Verify email"}
             </button>
           </form>
+
+          {/* Back to Registration */}
+          <div className="text-center mt-6">
+            <button
+              onClick={() => navigate('/book-consultation')}
+              className="text-gray-500 hover:text-gray-700 text-sm"
+            >
+              ← Back to Registration
+            </button>
+          </div>
         </div>
       </div>
     </div>
