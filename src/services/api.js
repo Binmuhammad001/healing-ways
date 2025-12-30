@@ -6,6 +6,11 @@ const API_URL = process.env.REACT_APP_API_URL ||
     ? 'https://your-backend-name.vercel.app/api'  // Your deployed backend
     : 'http://localhost:5001/api');  // Local development
 
+
+console.log('🌐 API_URL:', API_URL);
+console.log('🌐 Environment:', process.env.NODE_ENV);
+console.log('🌐 All env vars:', process.env);
+
 // Create axios instance with default config
 const apiClient = axios.create({
   baseURL: API_URL,
