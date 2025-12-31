@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Upload, X } from 'lucide-react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Add this import
+import { useNavigate } from 'react-router-dom';
+import { consultationAPI } from '../services/api';
 
 export default function ConsultationForm() {
-  const navigate = useNavigate(); // Add this hook
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     service: '',
     country: '',
@@ -15,17 +15,14 @@ export default function ConsultationForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [token, setToken] = useState('');
 
-  // Get token from localStorage on component mount
+  // Check authentication on mount
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    if (!storedToken) {
-      // Use navigate instead of window.location for React Router
-      navigate('/login');
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/book-consultation');
       return;
     }
-    setToken(storedToken);
   }, [navigate]);
 
   const handleInputChange = (e) => {
@@ -47,7 +44,15 @@ export default function ConsultationForm() {
       return;
     }
 
+    // Limit total files to 5
+    const totalFiles = uploadedFiles.length + validFiles.length;
+    if (totalFiles > 5) {
+      setError('Maximum 5 files allowed');
+      return;
+    }
+
     setUploadedFiles([...uploadedFiles, ...validFiles]);
+    setError('');
   };
 
   const removeFile = (index) => {
@@ -59,9 +64,10 @@ export default function ConsultationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    const token = localStorage.getItem('token');
     if (!token) {
       setError('Please login first');
-      navigate('/login');
+      navigate('/book-consultation');
       return;
     }
 
@@ -84,20 +90,11 @@ export default function ConsultationForm() {
         submissionData.append('medicalReports', file);
       });
 
-      // Make API call - UPDATE THIS URL TO YOUR BACKEND
-      const response = await axios.post(
-        'http://localhost:5000/api/consultations/book', // Make sure this matches your backend
-        submissionData,
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-      );
+      // Make API call using the consultation API service
+      const response = await consultationAPI.bookConsultation(submissionData);
 
       if (response.data.success) {
-        setSuccess('Consultation booked successfully!');
+        setSuccess('Consultation booked successfully! Redirecting to dashboard...');
         
         // Reset form
         setFormData({
@@ -108,9 +105,9 @@ export default function ConsultationForm() {
         });
         setUploadedFiles([]);
 
-        // Use navigate instead of window.location
+        // Redirect to dashboard after 2 seconds
         setTimeout(() => {
-          navigate('/dashboard'); // Make sure '/dashboard' route exists
+          navigate('/dashboard');
         }, 2000);
       }
 
@@ -119,14 +116,17 @@ export default function ConsultationForm() {
       
       if (error.response) {
         // Server responded with error
-        if (error.response.status === 404) {
-          setError('API endpoint not found. Please check backend server.');
+        if (error.response.status === 401) {
+          setError('Session expired. Please login again.');
+          setTimeout(() => navigate('/book-consultation'), 2000);
+        } else if (error.response.status === 404) {
+          setError('API endpoint not found. Please contact support.');
         } else {
           setError(error.response.data.message || 'Booking failed. Please try again.');
         }
       } else if (error.request) {
         // Request made but no response
-        setError('Backend server is not responding. Please check if server is running.');
+        setError('Cannot connect to server. Please check your internet connection.');
       } else {
         // Other errors
         setError('An error occurred. Please try again.');
@@ -135,20 +135,6 @@ export default function ConsultationForm() {
       setLoading(false);
     }
   };
-
-  // Check if backend server is running
-  const checkBackend = async () => {
-    try {
-      await axios.get('http://localhost:5000/api/health');
-    } catch (error) {
-      setError('Backend server is not running. Please start your backend server.');
-    }
-  };
-
-  // Check backend on component mount
-  useEffect(() => {
-    checkBackend();
-  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
@@ -161,11 +147,11 @@ export default function ConsultationForm() {
           </p>
         </div>
 
-        {/* Progress Steps - FIXED: Added proper routing */}
+        {/* Progress Steps */}
         <div className="flex items-center justify-center mb-12">
           <div className="flex items-center">
             {/* Step 1 */}
-            <div className="flex items-center cursor-pointer" onClick={() => navigate('/register')}>
+            <div className="flex items-center cursor-pointer" onClick={() => navigate('/book-consultation')}>
               <div className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white flex items-center justify-center text-gray-500 font-medium">
                 1
               </div>
@@ -174,7 +160,7 @@ export default function ConsultationForm() {
             <div className="w-16 h-0.5 bg-gray-300 mx-4"></div>
             
             {/* Step 2 */}
-            <div className="flex items-center cursor-pointer" onClick={() => navigate('/confirm')}>
+            <div className="flex items-center cursor-pointer" onClick={() => navigate('/verify-otp')}>
               <div className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white flex items-center justify-center text-gray-500 font-medium">
                 2
               </div>
@@ -317,7 +303,7 @@ export default function ConsultationForm() {
               <label className="block text-gray-900 font-semibold mb-1">
                 Upload medical report
               </label>
-              <p className="text-sm text-gray-500 mb-3">You can add more than one</p>
+              <p className="text-sm text-gray-500 mb-3">You can add up to 5 files (max 5MB each)</p>
               
               {/* File Upload Area */}
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors">
@@ -328,15 +314,18 @@ export default function ConsultationForm() {
                   className="hidden"
                   id="file-upload"
                   accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                  disabled={uploadedFiles.length >= 5}
                 />
-                <label htmlFor="file-upload" className="cursor-pointer">
+                <label htmlFor="file-upload" className={uploadedFiles.length >= 5 ? 'cursor-not-allowed' : 'cursor-pointer'}>
                   <div className="flex flex-col items-center">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
                       <Upload className="text-blue-500" size={24} />
                     </div>
-                    <p className="text-gray-900 font-medium mb-1">Tap here to upload</p>
+                    <p className="text-gray-900 font-medium mb-1">
+                      {uploadedFiles.length >= 5 ? 'Maximum files reached' : 'Tap here to upload'}
+                    </p>
                     <p className="text-sm text-gray-500">Max. File size: 5MB</p>
-                    <p className="text-xs text-gray-400 mt-1">Supported: PDF, DOC, JPG, PNG</p>
+                    <p className="text-xs text-gray-400 mt-1">Supported: PDF, DOC, DOCX, JPG, PNG</p>
                   </div>
                 </label>
               </div>
@@ -344,7 +333,7 @@ export default function ConsultationForm() {
               {/* Uploaded Files List */}
               {uploadedFiles.length > 0 && (
                 <div className="mt-4">
-                  <p className="text-sm text-gray-600 mb-2">Uploaded files:</p>
+                  <p className="text-sm text-gray-600 mb-2">Uploaded files: ({uploadedFiles.length}/5)</p>
                   <div className="space-y-2">
                     {uploadedFiles.map((file, index) => (
                       <div key={index} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
