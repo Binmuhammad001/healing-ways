@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // API Base URL - Update this for production
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend-name.vercel.app/api'  // ← Update this when deploying
+  ? 'https://healingways-backend.vercel.app/api'  // ← Update this when deploying
   : 'http://localhost:5001/api';  // ← Changed from 5000 to 5001 to match your port
 
 // Create axios instance
