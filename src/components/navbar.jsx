@@ -23,7 +23,7 @@ export default function Navbar() {
         {/* MENU BUTTON (Mobile) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-gray-700 focus:outline-none text-2xl"
+          className="md:hidden text-gray-700 focus:outline-none"
         >
           ☰
         </button>
@@ -53,22 +53,24 @@ export default function Navbar() {
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
-            <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className={`block py-2 px-4 text-gray-700 flex items-center justify-center mx-auto 
-              bg-white hover:text-blue-600 focus:outline-none transition-colors`}
-            >
-              Services
-              <svg
-                className="w-4 h-4 ml-1 mt-0.5 text-gray-600 group-hover:text-blue-600 transition-transform duration-200"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+           <button
+  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+  className={`block py-2 px-4 text-gray-700 flex items-center justify-center mx-auto 
+  bg-white hover:text-blue-600 focus:outline-none transition-colors`}
+  style={{ backgroundColor: "#fff" }}
+>
+  Services
+  <svg
+    className="w-4 h-4 ml-1 mt-0.5 text-gray-600 group-hover:text-blue-600 transition-transform duration-200"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+  </svg>
+</button>
+
 
             {/* Dropdown menu */}
             <ul
@@ -77,35 +79,35 @@ export default function Navbar() {
               }`}
             >
               <li>
-                <a href="/rep_service" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
-                  Report Translation
+                <a
+                  href="/rep_service"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                >
+                  Report Translation 
                 </a>
               </li>
               <li>
-                <a href="/med_service" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
-                  Medical Tourism
+                <a
+                  href="/med_service"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                >
+                  Medical Tourism 
                 </a>
               </li>
               <li>
-                <a href="/con_service" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                <a
+                  href="/con_service"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                >
                   Medical Consultancy
                 </a>
               </li>
               <li>
-                <a href="/acc_service" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                <a
+                  href="/acc_service"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                >
                   Accommodation & Logistics
-                </a>
-              </li>
-
-              {/* MOBILE ONLY buttons */}
-              <li className="md:hidden">
-                <a href="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
-                  Login
-                </a>
-              </li>
-              <li className="md:hidden">
-                <a href="/signup" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
-                  Book Appointment
                 </a>
               </li>
             </ul>
@@ -118,31 +120,16 @@ export default function Navbar() {
           </li>
         </ul>
 
-         {/* MOBILE ONLY buttons */}
-              <li className="md:hidden">
-                <a href="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
-                  Login
-                </a>
-              </li>
-              <li className="md:hidden">
-                <a href="/signup" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
-                  Book Appointment
-                </a>
-              </li>
-            </ul>
-          </li>
-
-        {/* RIGHT BUTTONS (Desktop Only) */}
+        {/* RIGHT BUTTONS */}
         <div className="hidden md:flex items-center space-x-6 lg:space-x-10">
           <a href="/login" className="text-gray-700 hover:text-blue-600 transition">
             Login
           </a>
-
-          <a href="/signup">
-            <button className="bg-[#137EE8] text-white px-5 py-2.5 rounded-md hover:bg-[#0f6bc7] transition whitespace-nowrap">
-              Book Appointment
-            </button>
-          </a>
+         <a href="/signup">
+      <button className="bg-[#137EE8] text-white px-5 py-2.5 rounded-md hover:bg-[#0f6bc7] transition whitespace-nowrap">
+        Book Appointment
+      </button>
+    </a>
         </div>
       </div>
     </nav>
