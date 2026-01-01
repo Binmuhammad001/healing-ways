@@ -94,7 +94,7 @@ export default function ConsultationForm() {
       const response = await consultationAPI.bookConsultation(submissionData);
 
       if (response.data.success) {
-        setSuccess('Consultation booked successfully! Redirecting to dashboard...');
+        setSuccess('Consultation booked successfully! Redirecting to Homepage...');
         
         // Reset form
         setFormData({
@@ -107,7 +107,7 @@ export default function ConsultationForm() {
 
         // Redirect to dashboard after 2 seconds
         setTimeout(() => {
-          navigate('/dashboard');
+          navigate('/');
         }, 2000);
       }
 
