@@ -47,17 +47,7 @@ export default function Navbar() {
             </a>
           </li>
           
-          <li>
-            <a href="/login" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
-              Login
-            </a>
-          </li>
-          
-          <li>
-            <a href="/sinup" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
-              Book Appointment
-            </a>
-          </li>
+         
 
           {/* SERVICES DROPDOWN */}
           <li
@@ -125,12 +115,33 @@ export default function Navbar() {
             </ul>
           </li>
 
+            <li className="md:hidden">
+        <a
+          href="/login"
+          className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+        >
+          Login
+        </a>
+      </li>
+      <li className="md:hidden">
+        <a
+          href="/signup"
+          className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+        >
+          Book Appointment
+        </a>
+      </li>
+    </ul>
+  </li>
+
           <li>
             <a href="/contact" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
               Contact
             </a>
           </li>
         </ul>
+
+        
 
         {/* RIGHT BUTTONS */}
         <div className="hidden md:flex items-center space-x-6 lg:space-x-10">
