@@ -118,6 +118,20 @@ export default function Navbar() {
           </li>
         </ul>
 
+         {/* MOBILE ONLY buttons */}
+              <li className="md:hidden">
+                <a href="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                  Login
+                </a>
+              </li>
+              <li className="md:hidden">
+                <a href="/signup" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                  Book Appointment
+                </a>
+              </li>
+            </ul>
+          </li>
+
         {/* RIGHT BUTTONS (Desktop Only) */}
         <div className="hidden md:flex items-center space-x-6 lg:space-x-10">
           <a href="/login" className="text-gray-700 hover:text-blue-600 transition">
