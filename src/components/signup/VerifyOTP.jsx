@@ -69,23 +69,22 @@ export default function VerifyOTP() {
     }
 
     try {
-      // ✅ FIXED: Pass email and OTP as separate parameters
       const response = await authAPI.verifyOTP(email, otpCode);
 
       if (response.data.success) {
         // Save token and user data
         localStorage.setItem('token', response.data.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.data));
+        localStorage.setItem('user', JSON.stringify(response.data.data.user));
         localStorage.removeItem('pendingEmail');
         localStorage.removeItem('userData');
 
-        // Show success message briefly
+        // Clear messages
         setResendSuccess(false);
         setError("");
         
-        // Redirect to dashboard or home
+        // ✅ FIXED: Redirect to consultation form instead of dashboard
         setTimeout(() => {
-          navigate('/dashboard'); // Change this to wherever you want
+          navigate('/consultation'); // Changed from '/dashboard'
         }, 1000);
       }
     } catch (error) {
@@ -105,7 +104,6 @@ export default function VerifyOTP() {
     setError("");
     
     try {
-      // ✅ FIXED: Pass email as parameter, not object
       const response = await authAPI.resendOTP(email);
       
       if (response.data.success) {
