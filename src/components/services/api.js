@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Base URL - update this for production
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// For Vite, use VITE_ prefix instead of REACT_APP_
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
 
 // Create axios instance
 const api = axios.create({
@@ -31,50 +31,39 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token expired or invalid
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login';
+      window.location.href = '/book-consultation';
     }
     return Promise.reject(error);
   }
 );
 
-// ============================================
 // AUTH API
-// ============================================
 export const authAPI = {
-  // Register new user
   register: (userData) => {
     return api.post('/auth/register', userData);
   },
 
-  // Verify OTP
   verifyOTP: (email, otp) => {
     return api.post('/auth/verify-otp', { email, otp });
   },
 
-  // Resend OTP
   resendOTP: (email) => {
     return api.post('/auth/resend-otp', { email });
   },
 
-  // Login
   login: (credentials) => {
     return api.post('/auth/login', credentials);
   },
 
-  // Get current user
   getCurrentUser: () => {
     return api.get('/auth/me');
   }
 };
 
-// ============================================
 // CONSULTATION API
-// ============================================
 export const consultationAPI = {
-  // Book consultation
   bookConsultation: (formData) => {
     return api.post('/consultations/book', formData, {
       headers: {
@@ -83,22 +72,17 @@ export const consultationAPI = {
     });
   },
 
-  // Get user's consultations
   getMyConsultations: () => {
     return api.get('/consultations/my-consultations');
   },
 
-  // Get consultation by ID
   getConsultationById: (id) => {
     return api.get(`/consultations/${id}`);
   }
 };
 
-// ============================================
 // CONTACT API
-// ============================================
 export const contactAPI = {
-  // Submit contact form
   submitContact: (contactData) => {
     return api.post('/contact', contactData);
   }
