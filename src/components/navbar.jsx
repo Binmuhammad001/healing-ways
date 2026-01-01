@@ -23,7 +23,7 @@ export default function Navbar() {
         {/* MENU BUTTON (Mobile) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-gray-700 focus:outline-none"
+          className="md:hidden text-black-700 focus:outline-none"
         >
           ☰
         </button>
