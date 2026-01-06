@@ -30,10 +30,12 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    // Only redirect if it's a token expiration issue, not login failure
+    if (error.response?.status === 401 && error.config.url !== '/auth/login') {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/book-consultation';
+      // Don't redirect immediately, let the component handle it
+      console.log('Token expired or invalid');
     }
     return Promise.reject(error);
   }
@@ -71,7 +73,7 @@ export const consultationAPI = {
     return api.get('/consultations/my-consultations');
   },
   getConsultationById: (id) => {
-    return api.get(`/consultations/${id}`);  // FIXED: Added parenthesis correctly
+    return api.get(`/consultations/${id}`);
   }
 };
 
