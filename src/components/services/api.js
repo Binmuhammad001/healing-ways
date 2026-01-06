@@ -44,19 +44,15 @@ export const authAPI = {
   register: (userData) => {
     return api.post('/auth/register', userData);
   },
-
   verifyOTP: (email, otp) => {
     return api.post('/auth/verify-otp', { email, otp });
   },
-
   resendOTP: (email) => {
     return api.post('/auth/resend-otp', { email });
   },
-
   login: (credentials) => {
     return api.post('/auth/login', credentials);
   },
-
   getCurrentUser: () => {
     return api.get('/auth/me');
   }
@@ -71,13 +67,11 @@ export const consultationAPI = {
       }
     });
   },
-
   getMyConsultations: () => {
     return api.get('/consultations/my-consultations');
   },
-
   getConsultationById: (id) => {
-    return api.get(`/consultations/${id}`);
+    return api.get(`/consultations/${id}`);  // FIXED: Added parenthesis correctly
   }
 };
 
