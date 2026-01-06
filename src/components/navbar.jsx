@@ -75,7 +75,7 @@ export default function Navbar() {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="block py-2 px-4 text-gray-700 flex items-center justify-center mx-auto bg-white hover:text-blue-600 focus:outline-none transition-colors"
             >
-              Servicess
+              Services
               <svg
                 className="w-4 h-4 ml-1 mt-0.5"
                 fill="none"
