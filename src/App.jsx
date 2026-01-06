@@ -11,11 +11,13 @@ import Login from './pages/login';
 import BookConsultationForm from './components/signup/signup_form';
 import VerifyOTP from './pages/otp';
 import ConsultationForm from "./pages/consultation";
+import { AuthProvider } from "./context/AuthContext";
 
 
 
 function App(){
     return(
+        <AuthProvider>
         <Router>
             <Routes>
                 <Route path="/" element={<Home/>} />
@@ -32,6 +34,7 @@ function App(){
         <Route path="/consultation" element={<ConsultationForm />} />
             </Routes>
         </Router>
+        </AuthProvider>
     );
 }
 
