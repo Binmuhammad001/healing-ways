@@ -31,10 +31,10 @@ export default function LoginForm() {
     try {
       const result = await login(formData);
       
-      if (result.success) {
-        // Redirect to home page after successful login
-        navigate('/');
-      } else {
+     if (result.success) {
+  navigate('/consultation-form'); // matches your ConsultationForm route
+}
+ else {
         setError(result.message);
       }
     } catch (err) {
