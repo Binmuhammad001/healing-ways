@@ -1,9 +1,28 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import Logo from "../assets/changed.svg";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const { isAuthenticated, user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+    setIsUserMenuOpen(false);
+  };
+
+  const handleBookAppointment = () => {
+    if (isAuthenticated) {
+      navigate('/consultation-form');
+    } else {
+      navigate('/signup');
+    }
+  };
 
   return (
     <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
@@ -53,24 +72,22 @@ export default function Navbar() {
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
-           <button
-  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-  className={`block py-2 px-4 text-gray-700 flex items-center justify-center mx-auto 
-  bg-white hover:text-blue-600 focus:outline-none transition-colors`}
-  style={{ backgroundColor: "#fff" }}
->
-  Services
-  <svg
-    className="w-4 h-4 ml-1 mt-0.5 text-gray-600 group-hover:text-blue-600 transition-transform duration-200"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    viewBox="0 0 24 24"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-  </svg>
-</button>
-
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="block py-2 px-4 text-gray-700 flex items-center justify-center mx-auto 
+              bg-white hover:text-blue-600 focus:outline-none transition-colors"
+            >
+              Services
+              <svg
+                className="w-4 h-4 ml-1 mt-0.5 text-gray-600 group-hover:text-blue-600 transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
 
             {/* Dropdown menu */}
             <ul
@@ -79,7 +96,7 @@ export default function Navbar() {
               }`}
             >
               <li>
-                <a
+                
                   href="/rep_service"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                 >
@@ -87,7 +104,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a
+                
                   href="/med_service"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                 >
@@ -95,7 +112,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a
+                
                   href="/con_service"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                 >
@@ -103,7 +120,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a
+                
                   href="/acc_service"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                 >
@@ -118,18 +135,114 @@ export default function Navbar() {
               Contact
             </a>
           </li>
+
+          {/* Mobile Menu - Show Login/Signup or User Menu */}
+          {!isAuthenticated ? (
+            <>
+              <li className="md:hidden">
+                <a href="/login" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
+                  Login
+                </a>
+              </li>
+              <li className="md:hidden">
+                <button
+                  onClick={handleBookAppointment}
+                  className="block py-2 px-4 text-gray-700 hover:text-blue-600 w-full text-center"
+                >
+                  Book Appointment
+                </button>
+              </li>
+            </>
+          ) : (
+            <li className="md:hidden">
+              <div className="border-t border-gray-200 mt-2 pt-2">
+                <p className="px-4 py-2 text-sm text-gray-500">
+                  {user?.firstName} {user?.lastName}
+                </p>
+                <a href="/my-consultations" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
+                  My Consultations
+                </a>
+                <button
+                  onClick={handleLogout}
+                  className="block py-2 px-4 text-red-600 hover:text-red-700 w-full text-left"
+                >
+                  Logout
+                </button>
+              </div>
+            </li>
+          )}
         </ul>
 
-        {/* RIGHT BUTTONS */}
+        {/* RIGHT BUTTONS - Desktop */}
         <div className="hidden md:flex items-center space-x-6 lg:space-x-10">
-          <a href="/login" className="text-gray-700 hover:text-blue-600 transition">
-            Login
-          </a>
-         <a href="/signup">
-      <button className="bg-[#137EE8] text-white px-5 py-2.5 rounded-md hover:bg-[#0f6bc7] transition whitespace-nowrap">
-        Book Appointment
-      </button>
-    </a>
+          {!isAuthenticated ? (
+            <>
+              <a href="/login" className="text-gray-700 hover:text-blue-600 transition">
+                Login
+              </a>
+              <button
+                onClick={handleBookAppointment}
+                className="bg-[#137EE8] text-white px-5 py-2.5 rounded-md hover:bg-[#0f6bc7] transition whitespace-nowrap"
+              >
+                Book Appointment
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={handleBookAppointment}
+                className="bg-[#137EE8] text-white px-5 py-2.5 rounded-md hover:bg-[#0f6bc7] transition whitespace-nowrap"
+              >
+                Book Appointment
+              </button>
+              
+              {/* User Menu Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition"
+                >
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-medium">
+                    {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+                  </div>
+                  <span className="font-medium">{user?.firstName}</span>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {/* User Dropdown Menu */}
+                {isUserMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 border border-gray-100">
+                    <div className="px-4 py-2 border-b border-gray-100">
+                      <p className="text-sm font-medium text-gray-900">
+                        {user?.firstName} {user?.lastName}
+                      </p>
+                      <p className="text-xs text-gray-500">{user?.email}</p>
+                    </div>
+                    
+                      href="/my-consultations"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                    >
+                      My Consultations
+                    </a>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </nav>
