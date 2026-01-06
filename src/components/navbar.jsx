@@ -12,15 +12,15 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
     setIsUserMenuOpen(false);
   };
 
   const handleBookAppointment = () => {
     if (isAuthenticated) {
-      navigate('/consultation-form');
+      navigate("/consultation-form");
     } else {
-      navigate('/signup');
+      navigate("/signup");
     }
   };
 
@@ -51,8 +51,7 @@ export default function Navbar() {
         <ul
           className={`md:flex md:space-x-6 lg:space-x-8 md:items-center absolute md:static bg-white left-0 w-full md:w-auto transition-all duration-300 ease-in 
             ${isOpen ? "top-16 opacity-100" : "top-[-400px] opacity-0 md:opacity-100"}
-            md:justify-center md:flex-1 text-center
-          `}
+            md:justify-center md:flex-1 text-center`}
         >
           <li>
             <a href="/" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
@@ -74,12 +73,11 @@ export default function Navbar() {
           >
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="block py-2 px-4 text-gray-700 flex items-center justify-center mx-auto 
-              bg-white hover:text-blue-600 focus:outline-none transition-colors"
+              className="block py-2 px-4 text-gray-700 flex items-center justify-center mx-auto bg-white hover:text-blue-600 focus:outline-none transition-colors"
             >
               Services
               <svg
-                className="w-4 h-4 ml-1 mt-0.5 text-gray-600 group-hover:text-blue-600 transition-transform duration-200"
+                className="w-4 h-4 ml-1 mt-0.5"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
@@ -96,34 +94,22 @@ export default function Navbar() {
               }`}
             >
               <li>
-                
-                  href="/rep_service"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
-                >
-                  Report Translation 
+                <a href="/rep_service" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                  Report Translation
                 </a>
               </li>
               <li>
-                
-                  href="/med_service"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
-                >
-                  Medical Tourism 
+                <a href="/med_service" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                  Medical Tourism
                 </a>
               </li>
               <li>
-                
-                  href="/con_service"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
-                >
+                <a href="/con_service" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
                   Medical Consultancy
                 </a>
               </li>
               <li>
-                
-                  href="/acc_service"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
-                >
+                <a href="/acc_service" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
                   Accommodation & Logistics
                 </a>
               </li>
@@ -136,7 +122,7 @@ export default function Navbar() {
             </a>
           </li>
 
-          {/* Mobile Menu - Show Login/Signup or User Menu */}
+          {/* MOBILE AUTH MENU */}
           {!isAuthenticated ? (
             <>
               <li className="md:hidden">
@@ -173,7 +159,7 @@ export default function Navbar() {
           )}
         </ul>
 
-        {/* RIGHT BUTTONS - Desktop */}
+        {/* RIGHT BUTTONS - DESKTOP */}
         <div className="hidden md:flex items-center space-x-6 lg:space-x-10">
           {!isAuthenticated ? (
             <>
@@ -195,29 +181,23 @@ export default function Navbar() {
               >
                 Book Appointment
               </button>
-              
-              {/* User Menu Dropdown */}
+
+              {/* USER MENU */}
               <div className="relative">
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition"
                 >
                   <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-medium">
-                    {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+                    {user?.firstName?.charAt(0)}
+                    {user?.lastName?.charAt(0)}
                   </div>
                   <span className="font-medium">{user?.firstName}</span>
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
 
-                {/* User Dropdown Menu */}
                 {isUserMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 border border-gray-100">
                     <div className="px-4 py-2 border-b border-gray-100">
@@ -226,12 +206,14 @@ export default function Navbar() {
                       </p>
                       <p className="text-xs text-gray-500">{user?.email}</p>
                     </div>
-                    
+
+                    <a
                       href="/my-consultations"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     >
                       My Consultations
                     </a>
+
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
