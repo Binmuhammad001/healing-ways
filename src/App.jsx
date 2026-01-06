@@ -31,7 +31,7 @@ function App(){
                 <Route path="/login" element={<Login/>}  />
         <Route path="/register" element={<BookConsultationForm />} />
         <Route path="/verify-otp" element={<VerifyOTP />} />
-        <Route path="/consultation" element={<ConsultationForm />} />
+        <Route path="/consultation" element={<ConsultationForm />} >
             </Routes>
         </Router>
         </AuthProvider>
