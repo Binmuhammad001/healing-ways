@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from "../../context/AuthContext";
-
+import { useAuth } from '../../context/AuthContext';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -28,17 +27,33 @@ export default function LoginForm() {
     setLoading(true);
     setError('');
 
+    // Log the data being sent for debugging
+    console.log('Attempting login with:', { email: formData.email });
+
     try {
       const result = await login(formData);
       
-     if (result.success) {
-  navigate('/consultation-form'); // matches your ConsultationForm route
-}
- else {
-        setError(result.message);
+      console.log('Login result:', result);
+      
+      if (result.success) {
+        console.log('Login successful, redirecting...');
+        navigate('/');
+      } else {
+        console.error('Login failed:', result.message);
+        
+        // Handle specific error cases
+        if (result.requiresVerification) {
+          setError(result.message);
+          setTimeout(() => {
+            navigate('/verify-otp', { state: { email: result.email } });
+          }, 2000);
+        } else {
+          setError(result.message || 'Login failed. Please check your credentials.');
+        }
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      console.error('Login error:', err);
+      setError('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -139,7 +154,7 @@ export default function LoginForm() {
 
           <div className="text-center text-sm text-gray-600">
             Don't have an account yet?{' '}
-            <a href="/signup" className="text-gray-900 font-medium hover:text-gray-700 underline">
+            <a href="/book-consultation" className="text-gray-900 font-medium hover:text-gray-700 underline">
               Register
             </a>
           </div>
