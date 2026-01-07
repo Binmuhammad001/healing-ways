@@ -121,7 +121,7 @@ export default function Navbar() {
                 Book Appointment
               </button>
 
-            <div className="relative">
+          <div className="relative">
   <button 
     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} 
     className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition group"
@@ -136,8 +136,8 @@ export default function Navbar() {
   </button>
 
   {isUserMenuOpen && (
-    <div className="absolute right-0 mt-2 w-56 bg-white shadow-xl rounded-lg py-1 border border-gray-200 animate-fadeIn">
-      <div className="px-4 py-3 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-transparent">
+    <div className="absolute right-0 mt-2 w-56 bg-white shadow-xl rounded-lg py-1 border border-gray-200">
+      <div className="px-4 py-3 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-white">
         <p className="text-sm font-semibold text-gray-900">
           {user?.firstName} {user?.lastName}
         </p>
@@ -150,16 +150,16 @@ export default function Navbar() {
         <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
         </svg>
-        My Consultations
+        <span className="text-gray-900">My Consultations</span>
       </a>
       <button 
         onClick={handleLogout} 
-        className="flex items-center w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors border-t border-gray-100 mt-1"
+        className="flex items-center w-full text-left px-4 py-2.5 text-sm hover:bg-red-50 transition-colors border-t border-gray-100 mt-1"
       >
-        <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 mr-3 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
         </svg>
-        Logout
+        <span className="text-red-600">Logout</span>
       </button>
     </div>
   )}
