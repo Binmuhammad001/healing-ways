@@ -18,7 +18,7 @@ export default function Navbar() {
 
   const handleBookAppointment = () => {
     if (isAuthenticated) {
-      navigate("/consultation);
+      navigate("/consultation");
     } else {
       navigate("/signup");
     }
