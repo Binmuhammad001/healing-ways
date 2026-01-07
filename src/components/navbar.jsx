@@ -17,12 +17,9 @@ export default function Navbar() {
   };
 
   const handleBookAppointment = () => {
-    console.log('Book Appointment clicked, isAuthenticated:', isAuthenticated);
     if (isAuthenticated) {
-      console.log('Navigating to /consultation-form');
       navigate("/consultation-form");
     } else {
-      console.log('Navigating to /signup');
       navigate("/signup");
     }
   };
@@ -31,7 +28,6 @@ export default function Navbar() {
     <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
       <div className="container mx-auto flex items-center justify-between px-4 py-4 relative">
         
-        {/* LOGO */}
         <div className="min-w-[10rem] md:min-w-[12rem]">
           <a href="/" className="flex items-center flex-shrink-0">
             <img
@@ -42,7 +38,6 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* MENU BUTTON (Mobile) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-gray-700 focus:outline-none"
@@ -50,12 +45,7 @@ export default function Navbar() {
           ☰
         </button>
 
-        {/* NAV LINKS */}
-        <ul
-          className={`md:flex md:space-x-6 lg:space-x-8 md:items-center absolute md:static bg-white left-0 w-full md:w-auto transition-all duration-300 ease-in ${
-            isOpen ? "top-16 opacity-100" : "top-[-400px] opacity-0 md:opacity-100"
-          } md:justify-center md:flex-1 text-center`}
-        >
+        <ul className={`md:flex md:space-x-6 lg:space-x-8 md:items-center absolute md:static bg-white left-0 w-full md:w-auto transition-all duration-300 ease-in ${isOpen ? "top-16 opacity-100" : "top-[-400px] opacity-0 md:opacity-100"} md:justify-center md:flex-1 text-center`}>
           <li>
             <a href="/" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
               Home
@@ -68,7 +58,6 @@ export default function Navbar() {
             </a>
           </li>
 
-          {/* SERVICES DROPDOWN */}
           <li
             className="relative group"
             onMouseEnter={() => setIsDropdownOpen(true)}
@@ -79,23 +68,12 @@ export default function Navbar() {
               className="block py-2 px-4 text-gray-700 flex items-center justify-center mx-auto bg-white hover:text-blue-600 focus:outline-none transition-colors"
             >
               Services
-              <svg
-                className="w-4 h-4 ml-1 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-4 h-4 ml-1 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
-            {/* Dropdown menu */}
-            <ul
-              className={`absolute left-0 md:left-1/2 md:-translate-x-1/2 bg-white shadow-lg rounded-md mt-1 py-2 w-48 border border-gray-100 transition-all duration-300 ${
-                isDropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
-              }`}
-            >
+            <ul className={`absolute left-0 md:left-1/2 md:-translate-x-1/2 bg-white shadow-lg rounded-md mt-1 py-2 w-48 border border-gray-100 transition-all duration-300 ${isDropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"}`}>
               <li>
                 <a href="/rep_service" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
                   Report Translation
@@ -125,7 +103,6 @@ export default function Navbar() {
             </a>
           </li>
 
-          {/* MOBILE AUTH MENU */}
           {!isAuthenticated ? (
             <>
               <li className="md:hidden">
@@ -168,7 +145,6 @@ export default function Navbar() {
           )}
         </ul>
 
-        {/* RIGHT BUTTONS - DESKTOP */}
         <div className="hidden md:flex items-center space-x-6 lg:space-x-10">
           {!isAuthenticated ? (
             <>
@@ -191,7 +167,6 @@ export default function Navbar() {
                 Book Appointment
               </button>
 
-              {/* USER MENU */}
               <div className="relative">
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
@@ -216,7 +191,7 @@ export default function Navbar() {
                       <p className="text-xs text-gray-500">{user?.email}</p>
                     </div>
 
-                    
+                    <a
                       href="/my-consultations"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     >
