@@ -20,7 +20,7 @@ export default function ConsultationForm() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/book-consultation');
+      navigate('/login');
       return;
     }
   }, [navigate]);
