@@ -152,15 +152,15 @@ export default function Navbar() {
         </svg>
         <span className="text-gray-900">My Consultations</span>
       </a>
-      <button 
-        onClick={handleLogout} 
-        className="flex items-center w-full text-left px-4 py-2.5 text-sm hover:bg-red-50 transition-colors border-t border-gray-100 mt-1"
-      >
-        <svg className="w-4 h-4 mr-3 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-        </svg>
-        <span className="text-red-600">Logout</span>
-      </button>
+     <button 
+  onClick={handleLogout} 
+  className="flex items-center w-full text-left px-4 py-2.5 text-sm hover:bg-red-50 transition-colors border-t border-gray-100 mt-1 bg-white"
+>
+  <svg className="w-4 h-4 mr-3 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+  </svg>
+  <span className="text-red-600">Logout</span>
+</button>
     </div>
   )}
 </div>
