@@ -17,9 +17,12 @@ export default function Navbar() {
   };
 
   const handleBookAppointment = () => {
+    console.log('Book Appointment clicked, isAuthenticated:', isAuthenticated); // Debug log
     if (isAuthenticated) {
-      navigate("/consultation");
+      console.log('Navigating to /consultation-form'); // Debug log
+      navigate("/consultation-form");
     } else {
+      console.log('Navigating to /signup'); // Debug log
       navigate("/signup");
     }
   };
@@ -145,6 +148,12 @@ export default function Navbar() {
                 <p className="px-4 py-2 text-sm text-gray-500">
                   {user?.firstName} {user?.lastName}
                 </p>
+                <button
+                  onClick={handleBookAppointment}
+                  className="block py-2 px-4 text-gray-700 hover:text-blue-600 w-full text-left"
+                >
+                  Book Appointment
+                </button>
                 <a href="/my-consultations" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
                   My Consultations
                 </a>
@@ -207,7 +216,7 @@ export default function Navbar() {
                       <p className="text-xs text-gray-500">{user?.email}</p>
                     </div>
 
-                    <a
+                    
                       href="/my-consultations"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     >
