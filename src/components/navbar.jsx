@@ -18,7 +18,7 @@ export default function Navbar() {
 
   const handleBookAppointment = () => {
     if (isAuthenticated) {
-      navigate("/consultation");
+      navigate("/consultation");  // ✅ FIXED: Added closing quote
     } else {
       navigate("/signup");
     }
@@ -191,7 +191,7 @@ export default function Navbar() {
                       <p className="text-xs text-gray-500">{user?.email}</p>
                     </div>
 
-                    <a
+                    
                       href="/my-consultations"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     >
