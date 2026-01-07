@@ -132,7 +132,7 @@ export default function ConsultationForm() {
               <div className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white flex items-center justify-center text-gray-500 font-medium">
                 1
               </div>
-              <span className="ml-3 text-gray-500 font-medium">Register</span>
+              <span className="ml-3 text-gray-500 font-medium">Registers</span>
             </div>
             <div className="w-16 h-0.5 bg-gray-300 mx-4"></div>
             
