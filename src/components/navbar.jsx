@@ -17,12 +17,12 @@ export default function Navbar() {
   };
 
   const handleBookAppointment = () => {
-    console.log('Book Appointment clicked, isAuthenticated:', isAuthenticated); // Debug log
+    console.log('Book Appointment clicked, isAuthenticated:', isAuthenticated);
     if (isAuthenticated) {
-      console.log('Navigating to /consultation-form'); // Debug log
+      console.log('Navigating to /consultation-form');
       navigate("/consultation-form");
     } else {
-      console.log('Navigating to /signup'); // Debug log
+      console.log('Navigating to /signup');
       navigate("/signup");
     }
   };
@@ -52,9 +52,9 @@ export default function Navbar() {
 
         {/* NAV LINKS */}
         <ul
-          className={`md:flex md:space-x-6 lg:space-x-8 md:items-center absolute md:static bg-white left-0 w-full md:w-auto transition-all duration-300 ease-in 
-            ${isOpen ? "top-16 opacity-100" : "top-[-400px] opacity-0 md:opacity-100"}
-            md:justify-center md:flex-1 text-center`}
+          className={`md:flex md:space-x-6 lg:space-x-8 md:items-center absolute md:static bg-white left-0 w-full md:w-auto transition-all duration-300 ease-in ${
+            isOpen ? "top-16 opacity-100" : "top-[-400px] opacity-0 md:opacity-100"
+          } md:justify-center md:flex-1 text-center`}
         >
           <li>
             <a href="/" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
