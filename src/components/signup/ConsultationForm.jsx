@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, Upload, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { consultationAPI } from '../services/api';
@@ -16,15 +16,6 @@ export default function ConsultationForm() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Check authentication on mount
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-  }, [navigate]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -36,7 +27,6 @@ export default function ConsultationForm() {
   const handleFileUpload = (e) => {
     const files = Array.from(e.target.files);
     
-    // Validate file size (5MB max)
     const validFiles = files.filter(file => file.size <= 5 * 1024 * 1024);
     
     if (validFiles.length !== files.length) {
@@ -44,7 +34,6 @@ export default function ConsultationForm() {
       return;
     }
 
-    // Limit total files to 5
     const totalFiles = uploadedFiles.length + validFiles.length;
     if (totalFiles > 5) {
       setError('Maximum 5 files allowed');
@@ -67,7 +56,7 @@ export default function ConsultationForm() {
     const token = localStorage.getItem('token');
     if (!token) {
       setError('Please login first');
-      navigate('/book-consultation');
+      navigate('/login');
       return;
     }
 
@@ -76,27 +65,22 @@ export default function ConsultationForm() {
     setSuccess('');
 
     try {
-      // Prepare FormData for file upload
       const submissionData = new FormData();
       
-      // Append form fields
       submissionData.append('service', formData.service);
       submissionData.append('country', formData.country);
       submissionData.append('prisonholder', formData.prisonholder);
       submissionData.append('medicalHistory', formData.medicalHistory);
       
-      // Append files
       uploadedFiles.forEach(file => {
         submissionData.append('medicalReports', file);
       });
 
-      // Make API call using the consultation API service
       const response = await consultationAPI.bookConsultation(submissionData);
 
       if (response.data.success) {
         setSuccess('Consultation booked successfully! Redirecting to Homepage...');
         
-        // Reset form
         setFormData({
           service: '',
           country: '',
@@ -105,7 +89,6 @@ export default function ConsultationForm() {
         });
         setUploadedFiles([]);
 
-        // Redirect to dashboard after 2 seconds
         setTimeout(() => {
           navigate('/');
         }, 2000);
@@ -115,20 +98,17 @@ export default function ConsultationForm() {
       console.error('Booking error:', error);
       
       if (error.response) {
-        // Server responded with error
         if (error.response.status === 401) {
           setError('Session expired. Please login again.');
-          setTimeout(() => navigate('/book-consultation'), 2000);
+          setTimeout(() => navigate('/login'), 2000);
         } else if (error.response.status === 404) {
           setError('API endpoint not found. Please contact support.');
         } else {
           setError(error.response.data.message || 'Booking failed. Please try again.');
         }
       } else if (error.request) {
-        // Request made but no response
         setError('Cannot connect to server. Please check your internet connection.');
       } else {
-        // Other errors
         setError('An error occurred. Please try again.');
       }
     } finally {
@@ -139,7 +119,6 @@ export default function ConsultationForm() {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-2xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Book a consultation</h1>
           <p className="text-gray-600">
@@ -147,11 +126,9 @@ export default function ConsultationForm() {
           </p>
         </div>
 
-        {/* Progress Steps */}
         <div className="flex items-center justify-center mb-12">
           <div className="flex items-center">
-            {/* Step 1 */}
-            <div className="flex items-center cursor-pointer" onClick={() => navigate('/book-consultation')}>
+            <div className="flex items-center cursor-pointer" onClick={() => navigate('/signup')}>
               <div className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white flex items-center justify-center text-gray-500 font-medium">
                 1
               </div>
@@ -159,7 +136,6 @@ export default function ConsultationForm() {
             </div>
             <div className="w-16 h-0.5 bg-gray-300 mx-4"></div>
             
-            {/* Step 2 */}
             <div className="flex items-center cursor-pointer" onClick={() => navigate('/verify-otp')}>
               <div className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white flex items-center justify-center text-gray-500 font-medium">
                 2
@@ -168,7 +144,6 @@ export default function ConsultationForm() {
             </div>
             <div className="w-16 h-0.5 bg-gray-300 mx-4"></div>
             
-            {/* Step 3 (Current) */}
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-medium">
                 3
@@ -178,21 +153,18 @@ export default function ConsultationForm() {
           </div>
         </div>
 
-        {/* Form Card */}
         <div className="bg-white rounded-lg shadow-sm p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Consultation information</h2>
           <p className="text-gray-600 mb-8">
             Connecting people or medically challenged individuals to the right hospitals
           </p>
 
-          {/* Success Message */}
           {success && (
             <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
               {success}
             </div>
           )}
 
-          {/* Error Message */}
           {error && (
             <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
               {error}
@@ -200,7 +172,6 @@ export default function ConsultationForm() {
           )}
 
           <form onSubmit={handleSubmit}>
-            {/* Choose Service */}
             <div className="mb-6">
               <label className="block text-gray-900 font-semibold mb-3">
                 Choose Service *
@@ -224,7 +195,6 @@ export default function ConsultationForm() {
               </div>
             </div>
 
-            {/* Country of Residence */}
             <div className="mb-6">
               <label className="block text-gray-900 font-semibold mb-3">
                 Country of residence *
@@ -251,7 +221,6 @@ export default function ConsultationForm() {
               </div>
             </div>
 
-            {/* Prisonholder */}
             <div className="mb-6">
               <label className="block text-gray-900 font-semibold mb-3">
                 Prisonholder
@@ -282,7 +251,6 @@ export default function ConsultationForm() {
               </div>
             </div>
 
-            {/* Medical History */}
             <div className="mb-6">
               <label className="block text-gray-900 font-semibold mb-3">
                 Medical history *
@@ -298,14 +266,12 @@ export default function ConsultationForm() {
               />
             </div>
 
-            {/* Upload Medical Report */}
             <div className="mb-8">
               <label className="block text-gray-900 font-semibold mb-1">
                 Upload medical report
               </label>
               <p className="text-sm text-gray-500 mb-3">You can add up to 5 files (max 5MB each)</p>
               
-              {/* File Upload Area */}
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors">
                 <input
                   type="file"
@@ -330,7 +296,6 @@ export default function ConsultationForm() {
                 </label>
               </div>
 
-              {/* Uploaded Files List */}
               {uploadedFiles.length > 0 && (
                 <div className="mt-4">
                   <p className="text-sm text-gray-600 mb-2">Uploaded files: ({uploadedFiles.length}/5)</p>
@@ -362,7 +327,6 @@ export default function ConsultationForm() {
               )}
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
