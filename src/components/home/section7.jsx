@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
+
+  const navigate = useNavigate();
 
   const faqs = [
     "What makes healing different from other platforms?",
@@ -32,9 +35,13 @@ export default function FAQSection() {
               – answered below.
             </p>
 
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md transition">
-              Get in touch
-            </button>
+           <button
+  onClick={() => navigate("/contact")}
+  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md transition"
+>
+  Get in touch
+</button>
+
           </div>
 
           {/* Right Accordion */}
