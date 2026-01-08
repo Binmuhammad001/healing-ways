@@ -11,7 +11,7 @@ export default function Hero() {
 
   const handleBookConsultation = () => {
     if (isAuthenticated) {
-      navigate("/consultation-form");   // or /consultation if that’s your route
+      navigate("/consultation");   // or /consultation if that’s your route
     } else {
       navigate("/signup");
     }
