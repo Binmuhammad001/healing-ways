@@ -2,7 +2,6 @@ import React from "react";
 import hero1 from "../../assets/hero1.jpg";
 import hero2 from "../../assets/hero2.jpg";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 
 
 export default function Hero() {
