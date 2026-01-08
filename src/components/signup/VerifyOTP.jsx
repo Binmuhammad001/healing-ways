@@ -96,7 +96,7 @@ export default function VerifyOTP() {
             </div>
           )}
 
-          <form onSubmit={handleVerify}>
+          <form onSubmit={handleSubmit}>
             {/* OTP Inputs */}
             <div className="flex justify-between gap-3 mb-8">
               {otp.map((digit, index) => (
