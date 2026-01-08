@@ -21,7 +21,7 @@ export default function Navbar() {
     if (isAuthenticated) {
       navigate("/consultation");
     } else {
-      navigate("/signup");
+      navigate("/signup", { state: { fromBooking: true, from: "/consultation" } });
     }
   };
 
