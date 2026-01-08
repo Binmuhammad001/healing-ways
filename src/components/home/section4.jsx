@@ -1,6 +1,9 @@
 import React from "react";
 import { CheckCircle2 } from "lucide-react";
 import major from "../../assets/major.jpg";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+
 
 export default function Section4() {
   const benefits = [
@@ -9,6 +12,16 @@ export default function Section4() {
     "Over 8 years of experience in medical consulting",
     "A dedicated team of healthcare professionals"
   ];
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleBookConsultation = () => {
+    if (isAuthenticated) {
+      navigate("/consultation-form");   // or /consultation if that’s your route
+    } else {
+      navigate("/signup");
+    }
+  };
 
   return (
     <section className="py-16 md:py-20 bg-white overflow-x-hidden">
