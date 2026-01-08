@@ -20,7 +20,7 @@ export default function VerifyOTP() {
       setEmail(savedEmail);
     } else {
       // No pending email, redirect to registration
-      navigate('/book-consultation');
+      navigate('/login');
     }
   }, [navigate]);
 
