@@ -1,74 +1,64 @@
-import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { authAPI } from "../services/api";
 
-export default function SignupForm() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { register } = useAuth();
-  
+export default function BookConsultationForm() {
+  const navigate = useNavigate(); // Initialize navigate
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    password: ""
   });
+
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-    setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validation
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
     setLoading(true);
-    setError('');
+    setError("");
+    setSuccess("");
 
     try {
-      const result = await register({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        password: formData.password
-      });
+      // Prepare data for backend (remove address as it's not in our backend model)
+      const { address, ...userData } = formData;
+
+      // Call the backend API
+      const response = await authAPI.register(userData);
       
-      if (result.success) {
-        // Check if user came from booking flow
-        const fromBooking = location.state?.fromBooking || false;
+      if (response.data.success) {
+        setSuccess("Registration successful! Check your email for OTP verification.");
         
-        // Navigate to OTP verification with email and booking flag
-        navigate('/verify-otp', { 
-          state: { 
-            email: result.email,
-            fromBooking: fromBooking,
-            from: location.state?.from || '/'
-          } 
-        });
-      } else {
-        setError(result.message || 'Registration failed');
+        // Save user email for OTP verification page
+        localStorage.setItem('pendingEmail', formData.email);
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        // Redirect to OTP verification page immediately
+        navigate('/verify-otp'); // Use navigate instead of window.location.href
       }
-    } catch (err) {
-      setError('An error occurred. Please try again.');
+    } catch (error) {
+      console.error('Registration error:', error);
+      setError(
+        error.response?.data?.message || 
+        "Registration failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
   };
 
+  // Rest of your component remains the same...
   return (
     <div className="min-h-screen bg-white flex flex-col items-center px-4 pt-32">
       {/* Top Title */}
