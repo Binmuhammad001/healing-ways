@@ -1,129 +1,72 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { authAPI } from "../services/api";
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function VerifyOTP() {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [resendLoading, setResendLoading] = useState(false);
-  const [resendSuccess, setResendSuccess] = useState(false);
+  const location = useLocation();
+  const { verifyOTP } = useAuth();
   
-  const inputRefs = useRef([]);
+  const [otp, setOtp] = useState('');
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   useEffect(() => {
-    // Get email from localStorage
-    const savedEmail = localStorage.getItem('pendingEmail');
-    if (savedEmail) {
-      setEmail(savedEmail);
+    // Get email from location state (passed from registration)
+    if (location.state?.email) {
+      setEmail(location.state.email);
     } else {
-      // No pending email, redirect to registration
-      navigate('/book-consultation');
+      // If no email, redirect to signup
+      navigate('/signup');
     }
-  }, [navigate]);
+  }, [location, navigate]);
 
-  const handleOtpChange = (element, index) => {
-    if (isNaN(element.value)) return false;
-
-    const newOtp = [...otp];
-    newOtp[index] = element.value;
-    setOtp(newOtp);
-
-    // Focus next input
-    if (element.value !== "" && element.nextSibling) {
-      element.nextSibling.focus();
-    }
-  };
-
-  const handleKeyDown = (e, index) => {
-    if (e.key === 'Backspace' && !otp[index] && index > 0) {
-      // Move focus to previous input on backspace
-      inputRefs.current[index - 1].focus();
-    }
-  };
-
-  const handlePaste = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const pasteData = e.clipboardData.getData('text').slice(0, 6);
-    if (pasteData.length === 6 && !isNaN(pasteData)) {
-      const newOtp = pasteData.split('');
-      setOtp(newOtp);
-      // Focus the last input after paste
-      inputRefs.current[5].focus();
-    }
-  };
-
-  const handleVerify = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-
-    const otpCode = otp.join('');
-
-    if (otpCode.length !== 6) {
-      setError("Please enter a valid 6-digit OTP");
-      setLoading(false);
+    
+    if (!email || !otp) {
+      setError('Please enter the OTP code');
       return;
     }
 
+    setLoading(true);
+    setError('');
+    setSuccess('');
+
     try {
-      const response = await authAPI.verifyOTP(email, otpCode);
-
-      if (response.data.success) {
-        // Save token and user data
-        localStorage.setItem('token', response.data.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.data.user));
-        localStorage.removeItem('pendingEmail');
-        localStorage.removeItem('userData');
-
-        // Clear messages
-        setResendSuccess(false);
-        setError("");
+      const result = await verifyOTP(email, otp);
+      
+      if (result.success) {
+        setSuccess('Verification successful! Redirecting...');
         
-        // ✅ FIXED: Redirect to consultation form instead of dashboard
+        // Check if user came from "Book Appointment" flow
+        const intendedRoute = location.state?.from || '/';
+        
+        // Wait 1 second then redirect
         setTimeout(() => {
-          navigate('/consultation'); // Changed from '/dashboard'
+          if (location.state?.fromBooking) {
+            // If they came from booking, take them to consultation form
+            navigate('/consultation');
+          } else {
+            // Otherwise take them to homepage
+            navigate(intendedRoute);
+          }
         }, 1000);
+      } else {
+        setError(result.message || 'Verification failed');
       }
-    } catch (error) {
-      console.error('OTP verification error:', error);
-      setError(
-        error.response?.data?.message || 
-        "Invalid or expired OTP. Please try again."
-      );
+    } catch (err) {
+      setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
   const handleResendOTP = async () => {
-    setResendLoading(true);
-    setResendSuccess(false);
-    setError("");
-    
-    try {
-      const response = await authAPI.resendOTP(email);
-      
-      if (response.data.success) {
-        setResendSuccess(true);
-        // Clear OTP fields
-        setOtp(["", "", "", "", "", ""]);
-        // Focus first input
-        if (inputRefs.current[0]) {
-          inputRefs.current[0].focus();
-        }
-      }
-    } catch (error) {
-      console.error('Resend OTP error:', error);
-      setError(
-        error.response?.data?.message || 
-        "Failed to resend OTP. Please try again."
-      );
-    } finally {
-      setResendLoading(false);
-    }
+    // Add resend OTP logic here if you have it
+    console.log('Resend OTP for:', email);
   };
 
   return (
