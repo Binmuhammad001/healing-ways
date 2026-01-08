@@ -33,9 +33,13 @@ export default function Section8() {
               possible care geared towards restoring health.
             </p>
 
-           <button className="bg-[#137EE8] text-white px-6 py-3 rounded-md hover:bg-blue-700 transition w-fit">
+          <button
+  onClick={handleBookConsultation}
+  className="bg-[#137EE8] text-white px-6 py-3 rounded-md hover:bg-blue-700 transition w-fit"
+>
   Book a consultation
 </button>
+
 
           </div>
 
