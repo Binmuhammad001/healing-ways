@@ -26,7 +26,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
+    <nav className="bg-white fixed w-full top-0 left-0 z-50">
       <div className="container mx-auto flex items-center justify-between px-4 py-4 relative">
         
         <div className="min-w-[10rem] md:min-w-[12rem]">
