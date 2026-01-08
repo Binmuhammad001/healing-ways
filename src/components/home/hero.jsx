@@ -1,20 +1,8 @@
 import React from "react";
 import hero1 from "../../assets/hero1.jpg";
 import hero2 from "../../assets/hero2.jpg";
-import { useNavigate } from "react-router-dom";
-
 
 export default function Hero() {
-  const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
-
-  const handleBookConsultation = () => {
-    if (isAuthenticated) {
-      navigate("/consultation-form");   // or /consultation if that’s your route
-    } else {
-      navigate("/signup");
-    }
-  };
   return (
     <section className="pt-16 md:pt-24 bg-[#F0F4FA] overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -40,13 +28,9 @@ export default function Hero() {
               hospitals both locally and internationally to receive the best
               possible care geared towards restoring health.
             </p>
-           <button
-  onClick={handleBookConsultation}
-  className="bg-[#137EE8] text-white px-6 py-3 rounded-md hover:bg-blue-700 transition w-fit"
->
-  Book a consultation
-</button>
-
+            <button className="bg-[#137EE8] text-white px-6 py-3 rounded-md hover:bg-blue-700 transition w-fit">
+              Book a consultation
+            </button>
           </div>
         </div>
 
