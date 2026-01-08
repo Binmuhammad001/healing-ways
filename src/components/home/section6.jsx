@@ -1,8 +1,21 @@
 import React from "react";
 import { HeartPulse, UserCheck, Plane, FileCheck, Users } from "lucide-react";
 import HeroMajor from "../../assets/major.jpg";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+
 
 export default function Section6() {
+   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleBookConsultation = () => {
+    if (isAuthenticated) {
+      navigate("/consultation"); 
+    } else {
+      navigate("/signup");
+    }
+  };
   return (
     <section className="bg-white py-16 md:py-20 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -73,9 +86,13 @@ export default function Section6() {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium text-sm transition-colors">
-                Book a consultation
-              </button>
+              <button
+  onClick={handleBookConsultation}
+  className="bg-[#137EE8] text-white px-6 py-3 rounded-md hover:bg-blue-700 transition w-fit"
+>
+  Book a consultation
+</button>
+
               <button className="w-full sm:w-auto bg-[#137EE81A] hover:bg-blue-100 text-[#137EE8] px-6 py-3 rounded-md font-medium text-sm transition-colors">
                 Learn more
               </button>
