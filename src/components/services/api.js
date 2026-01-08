@@ -43,6 +43,11 @@ api.interceptors.response.use(
 
 // AUTH API
 export const authAPI = {
+
+  forgotPassword: (email) => api.post('/auth/forgot-password', { email }),
+  verifyResetCode: (email, code) => api.post('/auth/verify-reset-code', { email, code }),
+  resetPassword: (email, code, newPassword) => api.post('/auth/reset-password', { email, code, newPassword }),
+  
   register: (userData) => {
     return api.post('/auth/register', userData);
   },
