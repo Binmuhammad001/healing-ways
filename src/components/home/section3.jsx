@@ -1,6 +1,10 @@
 import React from "react";
 import { CheckCircle2 } from "lucide-react";
 import major from "../../assets/major.jpg";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+
+
 
 export default function Section3() {
   const benefits = [
@@ -10,6 +14,17 @@ export default function Section3() {
     "A dedicated team of healthcare professionals"
   ];
 
+   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleBookConsultation = () => {
+    if (isAuthenticated) {
+      navigate("/consultation");  
+    } else {
+      navigate("/signup");
+    }
+  };
+  
   return (
     <section className="py-16 md:py-20 bg-white overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -50,10 +65,13 @@ export default function Section3() {
               ))}
             </div>
 
-            {/* CTA Button */}
-            <button className="bg-[#137EE8] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
-              Book a consultation
-            </button>
+         <button
+  onClick={handleBookConsultation}
+  className="bg-[#137EE8] text-white px-6 py-3 rounded-md hover:bg-blue-700 transition w-fit"
+>
+  Book a consultation
+</button>
+
           </div>
         </div>
       </div>
