@@ -1,164 +1,209 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { authAPI } from "../services/api";
 
-export default function LoginForm() {
+export default function VerifyOTP() {
   const navigate = useNavigate();
-  const { login } = useAuth();
-  
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-  const [rememberMe, setRememberMe] = useState(false);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
+  const [resendLoading, setResendLoading] = useState(false);
+  const [resendSuccess, setResendSuccess] = useState(false);
+  
+  const inputRefs = useRef([]);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-    setError('');
+  useEffect(() => {
+    // Get email from localStorage
+    const savedEmail = localStorage.getItem('pendingEmail');
+    if (savedEmail) {
+      setEmail(savedEmail);
+    } else {
+      // No pending email, redirect to registration
+      navigate('/book-consultation');
+    }
+  }, [navigate]);
+
+  const handleOtpChange = (element, index) => {
+    if (isNaN(element.value)) return false;
+
+    const newOtp = [...otp];
+    newOtp[index] = element.value;
+    setOtp(newOtp);
+
+    // Focus next input
+    if (element.value !== "" && element.nextSibling) {
+      element.nextSibling.focus();
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleKeyDown = (e, index) => {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+      // Move focus to previous input on backspace
+      inputRefs.current[index - 1].focus();
+    }
+  };
+
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData.getData('text').slice(0, 6);
+    if (pasteData.length === 6 && !isNaN(pasteData)) {
+      const newOtp = pasteData.split('');
+      setOtp(newOtp);
+      // Focus the last input after paste
+      inputRefs.current[5].focus();
+    }
+  };
+
+  const handleVerify = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
-    // Log the data being sent for debugging
-    console.log('Attempting login with:', { email: formData.email });
+    const otpCode = otp.join('');
+
+    if (otpCode.length !== 6) {
+      setError("Please enter a valid 6-digit OTP");
+      setLoading(false);
+      return;
+    }
 
     try {
-      const result = await login(formData);
-      
-      console.log('Login result:', result);
-      
-      if (result.success) {
-        console.log('Login successful, redirecting...');
-        navigate('/');
-      } else {
-        console.error('Login failed:', result.message);
+      const response = await authAPI.verifyOTP(email, otpCode);
+
+      if (response.data.success) {
+        // Save token and user data
+        localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.data.user));
+        localStorage.removeItem('pendingEmail');
+        localStorage.removeItem('userData');
+
+        // Clear messages
+        setResendSuccess(false);
+        setError("");
         
-        // Handle specific error cases
-        if (result.requiresVerification) {
-          setError(result.message);
-          setTimeout(() => {
-            navigate('/verify-otp', { state: { email: result.email } });
-          }, 2000);
-        } else {
-          setError(result.message || 'Login failed. Please check your credentials.');
-        }
+        // ✅ FIXED: Redirect to consultation form instead of dashboard
+        setTimeout(() => {
+          navigate('/consultation'); // Changed from '/dashboard'
+        }, 1000);
       }
-    } catch (err) {
-      console.error('Login error:', err);
-      setError('An unexpected error occurred. Please try again.');
+    } catch (error) {
+      console.error('OTP verification error:', error);
+      setError(
+        error.response?.data?.message || 
+        "Invalid or expired OTP. Please try again."
+      );
     } finally {
       setLoading(false);
     }
   };
 
+  const handleResendOTP = async () => {
+    setResendLoading(true);
+    setResendSuccess(false);
+    setError("");
+    
+    try {
+      const response = await authAPI.resendOTP(email);
+      
+      if (response.data.success) {
+        setResendSuccess(true);
+        // Clear OTP fields
+        setOtp(["", "", "", "", "", ""]);
+        // Focus first input
+        if (inputRefs.current[0]) {
+          inputRefs.current[0].focus();
+        }
+      }
+    } catch (error) {
+      console.error('Resend OTP error:', error);
+      setError(
+        error.response?.data?.message || 
+        "Failed to resend OTP. Please try again."
+      );
+    } finally {
+      setResendLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 pt-20">
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 w-full max-w-lg">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Welcome back.
-          </h1>
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Login to your account
+    <div className="min-h-screen bg-white flex flex-col justify-center px-4 py-8">
+      <div className="flex flex-col items-center w-full max-w-md mx-auto">
+        {/* Form Container */}
+        <div className="w-full bg-white p-8">
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">
+            Verify email
           </h2>
-          <p className="text-gray-600 text-sm">
-            Connecting people or medically challenged individuals to the right hospitals
+          <p className="text-gray-600 text-center mb-8">
+            Enter the 6 digit OTP we sent to{" "}
+            <span className="font-semibold">{email || "your email"}</span>
+            <br />
+            to complete your registration
           </p>
-        </div>
 
-        {/* Error Message */}
-        {error && (
-          <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              required
-              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-900 mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter password"
-              required
-              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-            />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="remember"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-4 h-4 bg-white border-2 border-gray-300 rounded accent-blue-600 focus:ring-2 focus:ring-blue-500"
-              />
-              <label htmlFor="remember" className="ml-2 text-sm text-gray-900">
-                Remember me
-              </label>
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+              {error}
             </div>
-            <a href="/forgot-password" className="text-sm text-gray-900 hover:text-gray-700">
-              Forgot password?
-            </a>
-          </div>
+          )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors ${
-              loading ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
-          >
-            {loading ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Logging in...
-              </span>
-            ) : (
-              'Login'
-            )}
-          </button>
+          {resendSuccess && (
+            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
+              OTP has been resent successfully! Check your email.
+            </div>
+          )}
 
-          <div className="text-center text-sm text-gray-600">
-            Don't have an account yet?{' '}
-            <a href="/book-consultation" className="text-gray-900 font-medium hover:text-gray-700 underline">
-              Register
-            </a>
+          <form onSubmit={handleVerify}>
+            {/* OTP Inputs */}
+            <div className="flex justify-between gap-3 mb-8">
+              {otp.map((digit, index) => (
+                <input
+                  key={index}
+                  ref={(el) => (inputRefs.current[index] = el)}
+                  type="text"
+                  maxLength="1"
+                  value={digit}
+                  onChange={(e) => handleOtpChange(e.target, index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  onPaste={index === 0 ? handlePaste : undefined}
+                  className="w-14 h-14 border border-gray-300 rounded-xl text-center text-2xl font-bold focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors"
+                />
+              ))}
+            </div>
+
+            {/* Resend OTP */}
+            <div className="text-center mb-8">
+              <span className="text-gray-600">Didn't get an email? </span>
+              <button
+                type="button"
+                onClick={handleResendOTP}
+                disabled={resendLoading}
+                className="text-blue-600 font-semibold hover:text-blue-700 disabled:opacity-50 underline"
+              >
+                {resendLoading ? "Sending..." : "Resend OTP"}
+              </button>
+            </div>
+
+            {/* Verify Button */}
+            <button
+              type="submit"
+              disabled={loading || otp.join('').length !== 6}
+              className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-md"
+            >
+              {loading ? "Verifying..." : "Verify email"}
+            </button>
+          </form>
+
+          {/* Back to Registration */}
+          <div className="text-center mt-6">
+            <button
+              onClick={() => navigate('/book-consultation')}
+              className="text-gray-500 hover:text-gray-700 text-sm"
+            >
+              ← Back to Registration
+            </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
