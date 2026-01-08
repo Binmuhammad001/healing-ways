@@ -12,6 +12,8 @@ import BookConsultationForm from './components/signup/signup_form';
 import VerifyOTP from './pages/otp';
 import ConsultationForm from "./pages/consultation";
 import { AuthProvider } from "./context/AuthContext";
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 
 
@@ -32,6 +34,8 @@ function App(){
         <Route path="/register" element={<BookConsultationForm />} />
         <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/consultation" element={<ConsultationForm />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
             </Routes>
         </Router>
         </AuthProvider>
