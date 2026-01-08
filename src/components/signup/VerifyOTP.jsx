@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 export default function VerifyOTP() {
   const navigate = useNavigate();
@@ -96,7 +96,7 @@ export default function VerifyOTP() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleVerify}>
             {/* OTP Inputs */}
             <div className="flex justify-between gap-3 mb-8">
               {otp.map((digit, index) => (
