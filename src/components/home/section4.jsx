@@ -17,7 +17,7 @@ export default function Section4() {
 
   const handleBookConsultation = () => {
     if (isAuthenticated) {
-      navigate("/consultation-form");   // or /consultation if that’s your route
+      navigate("/consultation");  
     } else {
       navigate("/signup");
     }
