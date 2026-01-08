@@ -18,7 +18,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="pt-16 md:pt-24 bg-[#F0F4FA] overflow-x-hidden">
+    <section className="pt-20 md:pt-24 bg-[#F0F4FA] overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* === Text Section === */}
