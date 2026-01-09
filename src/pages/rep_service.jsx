@@ -14,6 +14,7 @@ export default function App(){
         <>
         <Navbar/>
         <Hero/>
+        <Section1/> 
         <Footer/>
         </>
     )
