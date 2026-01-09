@@ -35,12 +35,13 @@ export default function Navbar() {
           </a>
         </div>
 
-       <button
-      onClick={() => setIsOpen(!isOpen)}
-      className="md:hidden text-blue bg-transparent-600 hover:bg-transparent active:bg-transparent focus:bg-transparent focus:outline-none"
-    >
-      ☰
-    </button>
+      <button
+  onClick={() => setIsOpen(!isOpen)}
+  className="md:hidden text-white bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent focus:outline-none"
+>
+  ☰
+</button>
+
 
 
         <ul className={isOpen ? "md:flex md:space-x-6 lg:space-x-8 md:items-center absolute md:static bg-white left-0 w-full md:w-auto transition-all duration-300 ease-in top-16 opacity-100 md:justify-center md:flex-1 text-center" : "md:flex md:space-x-6 lg:space-x-8 md:items-center absolute md:static bg-white left-0 w-full md:w-auto transition-all duration-300 ease-in top-[-400px] opacity-0 md:opacity-100 md:justify-center md:flex-1 text-center"}>
