@@ -43,7 +43,7 @@ export default function OtherServicesCarousel() {
 
   const scroll = (direction) => {
     if (!scrollRef.current) return;
-    const scrollAmount = scrollRef.current.clientWidth * 0.8;
+    const scrollAmount = scrollRef.current.clientWidth * 0.9;
     scrollRef.current.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
@@ -57,13 +57,14 @@ export default function OtherServicesCarousel() {
   }, []);
 
   return (
-    <section className="bg-[#F7F3F0] py-16 md:py-20 overflow-x-hidden">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="bg-[#F7F3F0] py-12 sm:py-16 md:py-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start justify-between mb-8">
-          <div className="max-w-2xl mb-6 sm:mb-0">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
+
+          <div className="max-w-2xl">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
               Other services
             </h2>
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
@@ -73,11 +74,11 @@ export default function OtherServicesCarousel() {
           </div>
 
           {/* Arrows */}
-          <div className="flex gap-3 self-end sm:self-auto">
+          <div className="flex gap-3 justify-start md:justify-end">
             <button
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
-              className={`p-3 rounded-full ${
+              className={`p-3 rounded-full transition ${
                 canScrollLeft
                   ? "bg-gray-200 hover:bg-gray-300"
                   : "bg-gray-100 text-gray-400 cursor-not-allowed"
@@ -89,7 +90,7 @@ export default function OtherServicesCarousel() {
             <button
               onClick={() => scroll("right")}
               disabled={!canScrollRight}
-              className={`p-3 rounded-full ${
+              className={`p-3 rounded-full transition ${
                 canScrollRight
                   ? "bg-gray-200 hover:bg-gray-300"
                   : "bg-gray-100 text-gray-400 cursor-not-allowed"
@@ -112,13 +113,13 @@ export default function OtherServicesCarousel() {
               key={index}
               className="
                 flex-shrink-0 snap-center
-                w-[85vw] max-w-[320px]
-                sm:w-[280px]
-                md:w-[320px]
-                lg:w-[350px]
+                w-[80vw] max-w-[280px]
+                sm:w-[260px]
+                md:w-[300px]
+                lg:w-[340px]
               "
             >
-              <div className="overflow-hidden rounded-xl mb-3 h-48 sm:h-56 md:h-64">
+              <div className="overflow-hidden rounded-xl mb-3 h-44 sm:h-52 md:h-60 lg:h-64">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -134,7 +135,7 @@ export default function OtherServicesCarousel() {
                 {service.description}
               </p>
 
-              <a className="text-blue-600 text-sm font-medium inline-flex items-center gap-1">
+              <a className="text-blue-600 text-sm font-medium inline-flex items-center gap-1 hover:underline">
                 Learn more <ChevronRight className="w-4 h-4" />
               </a>
             </div>
