@@ -88,9 +88,13 @@ export default function Navbar() {
                 <a href="/login" className="block py-2 px-4 text-gray-700 hover:text-blue-600">Login</a>
               </li>
               <li className="md:hidden">
-                <button onClick={handleBookAppointment} className="block py-2 px-4 text-gray-700 hover:text-blue-600 w-full text-center">
-                  Book Appointment
-                </button>
+               <button
+            onClick={handleBookAppointment}
+            className="block py-2 px-4 text-gray-700 hover:text-blue-600 w-full text-left bg-transparent"
+          >
+            Book Appointment
+          </button>
+
               </li>
             </>
           ) : (
