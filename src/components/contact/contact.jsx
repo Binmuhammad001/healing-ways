@@ -71,7 +71,7 @@ export default function ContactSalesForm() {
   };
 
   return (
-    <section className="bg-white py-16 md:py-20 pt-48">
+    <section className="bg-white pt-24 pb-16 md:pt-32 md:pd-20">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left side - Form */}
