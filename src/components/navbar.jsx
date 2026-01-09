@@ -35,7 +35,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-gray-700 focus:outline-none">
+        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-blue-600 focus:outline-none">
           ☰
         </button>
 
@@ -93,9 +93,13 @@ export default function Navbar() {
                 <p className="px-4 py-2 text-sm text-gray-500">
                   {user?.firstName} {user?.lastName}
                 </p>
-                <button onClick={handleBookAppointment} className="block py-2 px-4 text-gray-700 hover:text-blue-600 w-full text-left">
-                  Book Appointment
-                </button>
+               <a 
+          onClick={handleBookAppointment}
+          className="block py-2 px-4 text-gray-700 hover:text-blue-600 cursor-pointer"
+        >
+          Book Appointment
+        </a>
+
                 <a href="/my-consultations" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
                   My Consultations
                 </a>
