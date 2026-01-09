@@ -35,12 +35,13 @@ export default function Navbar() {
           </a>
         </div>
 
-      <button
+     <button
   onClick={() => setIsOpen(!isOpen)}
-  className="md:hidden text-white bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent focus:outline-none"
+  className="md:hidden text-blue-600 bg-white hover:bg-white focus:outline-none"
 >
   ☰
 </button>
+
 
 
 
