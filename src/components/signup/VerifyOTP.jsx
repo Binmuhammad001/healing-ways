@@ -82,9 +82,9 @@ export default function VerifyOTP() {
         setResendSuccess(false);
         setError("");
         
-        // ✅ FIXED: Redirect to consultation form instead of dashboard
+        // Redirect to consultation form
         setTimeout(() => {
-          navigate('/consultation'); // Changed from '/dashboard'
+          navigate('/consultation');
         }, 1000);
       }
     } catch (error) {
@@ -127,58 +127,59 @@ export default function VerifyOTP() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center px-4 py-8">
-      <div className="flex flex-col items-center w-full max-w-md mx-auto">
+    <div className="min-h-screen bg-white flex flex-col justify-center items-center px-4 py-8 sm:py-12">
+      <div className="flex flex-col items-center w-full max-w-md">
         {/* Form Container */}
-        <div className="w-full bg-white p-8">
-          <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">
+        <div className="w-full bg-white p-6 sm:p-8 rounded-lg">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-2 sm:mb-3">
             Verify email
           </h2>
-          <p className="text-gray-600 text-center mb-8">
+          <p className="text-gray-600 text-sm sm:text-base text-center mb-6 sm:mb-8">
             Enter the 6 digit OTP we sent to{" "}
-            <span className="font-semibold">{email || "your email"}</span>
-            <br />
-            to complete your registration
+            <span className="font-semibold block sm:inline mt-1 sm:mt-0">{email || "your email"}</span>
+            <br className="hidden sm:block" />
+            <span className="block sm:inline">to complete your registration</span>
           </p>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm sm:text-base">
               {error}
             </div>
           )}
 
           {resendSuccess && (
-            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
+            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 text-sm sm:text-base">
               OTP has been resent successfully! Check your email.
             </div>
           )}
 
           <form onSubmit={handleVerify}>
             {/* OTP Inputs */}
-            <div className="flex justify-between gap-3 mb-8">
+            <div className="flex justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
               {otp.map((digit, index) => (
                 <input
                   key={index}
                   ref={(el) => (inputRefs.current[index] = el)}
                   type="text"
+                  inputMode="numeric"
                   maxLength="1"
                   value={digit}
                   onChange={(e) => handleOtpChange(e.target, index)}
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   onPaste={index === 0 ? handlePaste : undefined}
-                  className="w-14 h-14 border border-gray-300 rounded-xl text-center text-2xl font-bold focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors"
+                  className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-gray-300 rounded-lg sm:rounded-xl text-center text-xl sm:text-2xl font-bold text-gray-900 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors"
                 />
               ))}
             </div>
 
             {/* Resend OTP */}
-            <div className="text-center mb-8">
-              <span className="text-gray-600">Didn't get an email? </span>
+            <div className="text-center mb-6 sm:mb-8">
+              <span className="text-gray-600 text-sm sm:text-base">Didn't get an email? </span>
               <button
                 type="button"
                 onClick={handleResendOTP}
                 disabled={resendLoading}
-                className="text-blue-600 font-semibold hover:text-blue-700 disabled:opacity-50 underline"
+                className="text-blue-600 font-semibold hover:text-blue-700 disabled:opacity-50 underline text-sm sm:text-base"
               >
                 {resendLoading ? "Sending..." : "Resend OTP"}
               </button>
@@ -188,17 +189,17 @@ export default function VerifyOTP() {
             <button
               type="submit"
               disabled={loading || otp.join('').length !== 6}
-              className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-md"
+              className="w-full bg-blue-600 text-white py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-base sm:text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-md"
             >
               {loading ? "Verifying..." : "Verify email"}
             </button>
           </form>
 
           {/* Back to Registration */}
-          <div className="text-center mt-6">
+          <div className="text-center mt-6 sm:mt-8">
             <button
               onClick={() => navigate('/book-consultation')}
-              className="text-gray-500 hover:text-gray-700 text-sm"
+              className="text-gray-500 hover:text-gray-700 text-xs sm:text-sm"
             >
               ← Back to Registration
             </button>
