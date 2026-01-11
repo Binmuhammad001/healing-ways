@@ -179,7 +179,7 @@ export default function VerifyOTP() {
                 type="button"
                 onClick={handleResendOTP}
                 disabled={resendLoading}
-                className="text-blue-600 font-semibold hover:text-blue-700 disabled:opacity-50 underline text-sm sm:text-base"
+                className="text-blue-600 font-semibold hover:text-blue-800 disabled:opacity-50 text-sm sm:text-base ml-1"
               >
                 {resendLoading ? "Sending..." : "Resend OTP"}
               </button>
@@ -199,7 +199,7 @@ export default function VerifyOTP() {
           <div className="text-center mt-6 sm:mt-8">
             <button
               onClick={() => navigate('/book-consultation')}
-              className="text-gray-500 hover:text-gray-700 text-xs sm:text-sm"
+              className="text-blue-600 hover:text-blue-800 font-semibold text-xs sm:text-sm"
             >
               ← Back to Registration
             </button>
