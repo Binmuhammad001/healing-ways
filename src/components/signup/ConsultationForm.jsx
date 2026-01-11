@@ -117,7 +117,7 @@ export default function ConsultationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pd-32 pt-32 sm:py-8 px-4 sm:px-6">
+    <div className="min-h-screen bg-gray-50 pb-32 pt-32 sm:py-8 px-4 sm:px-6">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
