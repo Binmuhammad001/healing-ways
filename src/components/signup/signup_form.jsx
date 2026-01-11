@@ -52,7 +52,7 @@ export default function BookConsultationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center px-4 pt-16 sm:pt-24 md:pt-32 pb-8">
+    <div className="min-h-screen bg-white flex flex-col items-center px-4 pt-16 sm:pt-32 md:pt-32 pb-8">
       {/* Top Title */}
       <div className="text-center mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800">
