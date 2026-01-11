@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Img from "../../assets/rep_img2.jpg";
 
 export default function OtherServicesCarousel() {
   const scrollRef = useRef(null);
@@ -11,25 +12,25 @@ export default function OtherServicesCarousel() {
       title: "Medical Report Translation",
       description:
         "We are committed to making your medical tourism journey a success, from initial consultation.",
-      image: "https://images.unsplash.com/photo-1576091160550-112173f7f869?w=400&h=300&fit=crop",
+      image: Img,
     },
     {
       title: "Medical Report Translation",
       description:
         "We are committed to making your medical tourism journey a success, from initial consultation.",
-      image: "https://images.unsplash.com/photo-1576091160550-112173f7f869?w=400&h=300&fit=crop",
+      image: Img,
     },
     {
       title: "Medical Report Translation",
       description:
         "We are committed to making your medical tourism journey a success, from initial consultation.",
-      image: "https://images.unsplash.com/photo-1576091160550-112173f7f869?w=400&h=300&fit=crop",
+      image: Img,
     },
     {
       title: "Medical Report Translation",
       description:
         "We are committed to making your medical tourism journey a success, from initial consultation.",
-      image: "https://images.unsplash.com/photo-1576091160550-112173f7f869?w=400&h=300&fit=crop",
+      image: Img,
     },
   ];
 
