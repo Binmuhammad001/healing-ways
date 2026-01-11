@@ -16,6 +16,7 @@ export default function App(){
         <Hero/>
         <Section1/> 
         <Section2/>
+        <Section3/>
         <Section4/>
         <Footer/>
         </>
