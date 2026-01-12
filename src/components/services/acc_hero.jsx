@@ -1,7 +1,20 @@
 import React from "react";
 import Hero from "../../assets/acc_bg.jpg";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function HeroSection() {
+  
+   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleBookConsultation = () => {
+    if (isAuthenticated) {
+      navigate("/consultation");
+    } else {
+      navigate("/signup");
+    }
+  };
   return (
     <section className="relative min-h-[70vh] sm:min-h-[80vh] flex items-center overflow-hidden">
       
@@ -34,7 +47,7 @@ export default function HeroSection() {
             possible care and support during their medical journey.
           </p>
 
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium text-sm sm:text-base transition-colors">
+          <button onClick={handleBookConsultation} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium text-sm sm:text-base transition-colors">
             Book a medical report consult
           </button>
 
