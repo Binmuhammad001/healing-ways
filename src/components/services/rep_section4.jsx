@@ -1,7 +1,20 @@
 import React from 'react';
 import Minor from '../../assets/minor.jpg';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Section8() {
+  
+   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleBookConsultation = () => {
+    if (isAuthenticated) {
+      navigate("/consultation");
+    } else {
+      navigate("/signup");
+    }
+  };
   return (
     <section className="bg-white py-10 sm:py-14 md:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
@@ -22,7 +35,7 @@ export default function Section8() {
             </p>
 
             <div className="flex justify-center lg:justify-start">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 rounded-md font-medium text-sm sm:text-base transition-colors">
+              <button onClick={handleBookConsultation} className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 rounded-md font-medium text-sm sm:text-base transition-colors">
                 Book a consultation
               </button>
             </div>
