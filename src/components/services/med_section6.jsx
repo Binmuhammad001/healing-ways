@@ -1,7 +1,7 @@
 import React from 'react';
 import Minor from '../../assets/minor.jpg';
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthCotext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Section8() {
    const navigate = useNavigate();
