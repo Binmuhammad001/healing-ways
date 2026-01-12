@@ -117,48 +117,48 @@ export default function VerifyOTP() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col pt-8 sm:pt-12 pb-8 px-4 sm:px-6 overflow-x-hidden">
+    <div className="min-h-screen bg-gray-50 flex flex-col pt-20 sm:pt-24 md:pt-32 pb-8 px-4 sm:px-6 w-screen overflow-x-hidden">
       {/* Header */}
-      <div className="text-center mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
+      <div className="text-center mb-6 sm:mb-8 max-w-full">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 break-words">
           Book a consultation
         </h1>
-        <p className="text-gray-600 text-xs sm:text-sm md:text-base">
+        <p className="text-gray-600 text-xs sm:text-sm md:text-base break-words">
           Connecting people or medically challenged individuals to the right hospitals
         </p>
       </div>
 
       {/* Stepper */}
-      <div className="flex items-center justify-center mb-8 sm:mb-12 px-2 overflow-x-auto">
-        <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 whitespace-nowrap">
+      <div className="flex items-center justify-center mb-8 sm:mb-12 px-0 max-w-full">
+        <div className="flex items-center gap-1 sm:gap-2 md:gap-4 flex-shrink-0">
           {/* Step 1 */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0">
+          <div className="flex items-center gap-0.5 sm:gap-1">
+            <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0">
               1
             </div>
-            <span className="text-gray-700 font-medium text-xs sm:text-sm">Register</span>
+            <span className="text-gray-700 font-medium text-xs sm:text-sm hidden sm:block">Register</span>
           </div>
 
           {/* Line 1 */}
-          <div className="w-6 sm:w-12 h-0.5 bg-gray-300 flex-shrink-0"></div>
+          <div className="w-4 sm:w-8 md:w-12 h-0.5 bg-gray-300 flex-shrink-0"></div>
 
           {/* Step 2 */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-gray-300 text-gray-600 flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0">
+          <div className="flex items-center gap-0.5 sm:gap-1">
+            <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full border-2 border-gray-300 text-gray-600 flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0">
               2
             </div>
-            <span className="text-gray-600 font-medium text-xs sm:text-sm">Confirm</span>
+            <span className="text-gray-600 font-medium text-xs sm:text-sm hidden sm:block">Confirm</span>
           </div>
 
           {/* Line 2 */}
-          <div className="w-6 sm:w-12 h-0.5 bg-gray-300 flex-shrink-0"></div>
+          <div className="w-4 sm:w-8 md:w-12 h-0.5 bg-gray-300 flex-shrink-0"></div>
 
           {/* Step 3 */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-gray-300 text-gray-600 flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0">
+          <div className="flex items-center gap-0.5 sm:gap-1">
+            <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full border-2 border-gray-300 text-gray-600 flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0">
               3
             </div>
-            <span className="text-gray-600 font-medium text-xs sm:text-sm">Consultation</span>
+            <span className="text-gray-600 font-medium text-xs sm:text-sm hidden sm:block">Consultation</span>
           </div>
         </div>
       </div>
@@ -206,7 +206,7 @@ export default function VerifyOTP() {
           </label>
 
           {/* OTP Inputs */}
-          <div className="flex justify-center gap-1.5 sm:gap-2 md:gap-3 mb-6 sm:mb-8">
+          <div className="flex justify-center gap-1.5 sm:gap-2 md:gap-3 mb-6 sm:mb-8 flex-wrap">
             {otp.map((digit, index) => (
               <input
                 key={index}
@@ -218,7 +218,7 @@ export default function VerifyOTP() {
                 onChange={(e) => handleOtpChange(e.target, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 onPaste={index === 0 ? handlePaste : undefined}
-                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 border-2 border-gray-300 rounded-lg text-center text-lg sm:text-xl md:text-2xl font-bold text-gray-900 bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none transition-colors flex-shrink-0"
+                className="w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 border-2 border-gray-300 rounded-lg text-center text-base sm:text-lg md:text-xl font-bold text-gray-900 bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none transition-colors flex-shrink-0"
               />
             ))}
           </div>
