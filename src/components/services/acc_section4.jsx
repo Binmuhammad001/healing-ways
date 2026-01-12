@@ -1,7 +1,20 @@
 import React from "react";
 import Minor from "../../assets/minor.jpg";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Section8() {
+  
+   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleBookConsultation = () => {
+    if (isAuthenticated) {
+      navigate("/consultation");
+    } else {
+      navigate("/signup");
+    }
+  };
   return (
     <section className="bg-white py-12 md:py-16 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -20,7 +33,7 @@ export default function Section8() {
               possible care geared towards restoring health.
             </p>
 
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium text-sm sm:text-base transition-colors">
+            <button onClick={handleBookConsultation} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium text-sm sm:text-base transition-colors">
               Book a consultation
             </button>
           </div>
