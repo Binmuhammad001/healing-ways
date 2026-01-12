@@ -1,6 +1,8 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import major from '../../assets/major.jpg';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";  
 
 export default function Section4() {
   const benefits = [
@@ -9,6 +11,18 @@ export default function Section4() {
     "Over 8 years experience",
     "A team of professionals"
   ];
+
+   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleBookConsultation = () => {
+    if (isAuthenticated) {
+      navigate("/consultation");
+    } else {
+      navigate("/signup");
+    }
+  };
+
 
   return (
     <section className="py-16 md:py-20 bg-[#F7F3F0] overflow-x-hidden">
@@ -47,7 +61,7 @@ export default function Section4() {
             </div>
 
             {/* Button */}
-            <button className="bg-[#137EE8] hover:bg-blue-700 text-white px-8 sm:px-10 py-3 sm:py-4 rounded-lg font-semibold transition-colors shadow-lg">
+            <button onClick={handleBookConsultation} className="bg-[#137EE8] hover:bg-blue-700 text-white px-8 sm:px-10 py-3 sm:py-4 rounded-lg font-semibold transition-colors shadow-lg">
               Book a consultation
             </button>
           </div>
