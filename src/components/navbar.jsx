@@ -112,7 +112,7 @@ export default function Navbar() {
                 <a href="/my-consultations" className="block py-2 px-4 text-gray-700 hover:text-blue-600">
                   My Consultations
                 </a>
-                <button onClick={handleLogout} className="block py-2 px-4 text-red-600 hover:text-red-700 w-full text-left">
+                <button onClick={handleLogout} className="block py-2 px-4 text-red-600 hover:text-red-700 w-full text-center bg-white">
                   Logout
                 </button>
               </div>
