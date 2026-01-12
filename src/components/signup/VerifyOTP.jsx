@@ -127,18 +127,18 @@ export default function VerifyOTP() {
   };
 
   return (
-<div className="min-h-screen bg-white flex flex-col justify-center items-center px-4 pt-2 pb-4 sm:pt-4 sm:pb-6">
+    <div className="min-h-screen bg-white flex flex-col justify-center items-center w-full px-4 py-8 sm:py-12 overflow-hidden">
       <div className="flex flex-col items-center w-full max-w-md">
         {/* Form Container */}
         <div className="w-full bg-white p-6 sm:p-8 rounded-lg">
           <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-2 sm:mb-3">
             Verify email
           </h2>
-          <p className="text-gray-600 text-sm sm:text-base text-center mb-6 sm:mb-8">
+          <p className="text-gray-600 text-sm sm:text-base text-center mb-6 sm:mb-8 px-2">
             Enter the 6 digit OTP we sent to{" "}
-            <span className="font-semibold block sm:inline mt-1 sm:mt-0">{email || "your email"}</span>
-            <br className="hidden sm:block" />
-            <span className="block sm:inline">to complete your registration</span>
+            <span className="font-semibold break-all">{email || "your email"}</span>
+            <br />
+            <span>to complete your registration</span>
           </p>
 
           {error && (
@@ -155,7 +155,7 @@ export default function VerifyOTP() {
 
           <form onSubmit={handleVerify}>
             {/* OTP Inputs */}
-            <div className="flex justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+            <div className="flex justify-center gap-1.5 sm:gap-3 mb-6 sm:mb-8 flex-wrap">
               {otp.map((digit, index) => (
                 <input
                   key={index}
@@ -167,19 +167,19 @@ export default function VerifyOTP() {
                   onChange={(e) => handleOtpChange(e.target, index)}
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   onPaste={index === 0 ? handlePaste : undefined}
-                  className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-gray-300 rounded-lg sm:rounded-xl text-center text-xl sm:text-2xl font-bold text-gray-900 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors"
+                  className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 border-2 border-gray-300 rounded-lg text-center text-lg sm:text-xl font-bold text-gray-900 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-colors flex-shrink-0"
                 />
               ))}
             </div>
 
             {/* Resend OTP */}
             <div className="text-center mb-6 sm:mb-8">
-              <span className="text-gray-600 text-sm sm:text-base">Didn't get an email? </span>
+              <p className="text-gray-600 text-xs sm:text-sm mb-3">Didn't get an email?</p>
               <button
                 type="button"
                 onClick={handleResendOTP}
                 disabled={resendLoading}
-                className="bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 text-sm sm:text-base ml-2 px-4 py-2 rounded-md inline-block"
+                className="bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5 rounded-md inline-block w-full sm:w-auto"
               >
                 {resendLoading ? "Sending..." : "Resend OTP"}
               </button>
@@ -189,7 +189,7 @@ export default function VerifyOTP() {
             <button
               type="submit"
               disabled={loading || otp.join('').length !== 6}
-              className="w-full bg-blue-600 text-white py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-base sm:text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-md"
+              className="w-full bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-md"
             >
               {loading ? "Verifying..." : "Verify email"}
             </button>
@@ -199,7 +199,7 @@ export default function VerifyOTP() {
           <div className="text-center mt-6 sm:mt-8">
             <button
               onClick={() => navigate('/book-consultation')}
-              className="bg-blue-600 text-white font-semibold hover:bg-blue-700 text-xs sm:text-sm px-4 py-2 rounded-md"
+              className="bg-blue-600 text-white font-semibold hover:bg-blue-700 text-xs sm:text-sm px-4 py-2 rounded-md w-full sm:w-auto"
             >
               ← Back to Registration
             </button>
