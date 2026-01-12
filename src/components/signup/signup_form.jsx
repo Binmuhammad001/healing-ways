@@ -10,7 +10,8 @@ export default function BookConsultationForm() {
     email: "",
     phone: "",
     address: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -26,6 +27,18 @@ export default function BookConsultationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check if passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
+
     setLoading(true);
     setError("");
     setSuccess("");
@@ -52,7 +65,7 @@ export default function BookConsultationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center px-4 pt-32 sm:pt-64 md:pt-32 pb-8">
+    <div className="min-h-screen bg-white flex flex-col items-center px-4 pt-16 sm:pt-24 md:pt-32 pb-8">
       {/* Top Title */}
       <div className="text-center mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800">
@@ -214,6 +227,25 @@ export default function BookConsultationForm() {
               minLength="6"
               required
             />
+          </div>
+
+          {/* Confirm Password */}
+          <div>
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              className="w-full border border-gray-300 rounded-md px-3 sm:px-4 py-2 sm:py-2.5 bg-white text-gray-700 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+            {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword && (
+              <p className="text-red-500 text-xs sm:text-sm mt-1">Passwords do not match</p>
+            )}
           </div>
 
           {/* Button */}
