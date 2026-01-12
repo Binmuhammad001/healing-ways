@@ -1,9 +1,20 @@
 import React from 'react';
 import Minor from '../../assets/minor.jpg';
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 
 export default function Section8() {
+   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleBookConsultation = () => {
+    if (isAuthenticated) {
+      navigate("/consultation");
+    } else {
+      navigate("/signup");
+    }
+  };
   return (
     <section className="bg-white py-5">
       <div class="container mx-auto px-6 md:px-12 max-w-7xl">
@@ -19,7 +30,7 @@ export default function Section8() {
               Connecting people or medically challenged individuals to the right hospitals both locally and internationally 
               to receive the best possible care geared towards restoring health.
             </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-md font-medium text-sm transition-colors">
+            <button onClick={handleBookConsultation} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-md font-medium text-sm transition-colors">
               Book a consultation
             </button>
           </div>
