@@ -1,6 +1,4 @@
-import { useState } from "react";
 import Logo from "../assets/logo.svg";
-
 
 export default function Footer() {
   return (
@@ -14,7 +12,6 @@ export default function Footer() {
             <div className="flex items-center mb-4">
               <img src={Logo} alt="Healing Waves logo" className="w-40 h-auto filter invert brightness-0 mr-2" />
             </div>
-
             <p className="text-gray-300 text-sm leading-relaxed mb-4">
               Connecting people or medically challenged individuals to the right hospitals both locally and internationally to receive the best possible care geared towards restoring health.
             </p>
@@ -73,12 +70,11 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Subscribe</h4>
             <div className="flex">
-             <input
+              <input
                 type="email"
                 placeholder="Get product updates"
                 className="flex-1 bg-white px-4 py-2 rounded-l-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
               />
-
               <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-md transition">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +94,6 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             {/* Social Icons */}
             <div className="flex space-x-4 mb-4 md:mb-0">
-
               
                 href="#linkedin"
                 className="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition"
@@ -108,7 +103,6 @@ export default function Footer() {
                   <circle cx="4" cy="4" r="2" />
                 </svg>
               </a>
-
               
                 href="#facebook"
                 className="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition"
@@ -117,7 +111,6 @@ export default function Footer() {
                   <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
                 </svg>
               </a>
-
               
                 href="#twitter"
                 className="w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition"
@@ -126,8 +119,6 @@ export default function Footer() {
                   <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
                 </svg>
               </a>
-            
-             
             </div>
 
             {/* Copyright */}
