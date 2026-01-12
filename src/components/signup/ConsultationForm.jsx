@@ -240,67 +240,7 @@ export default function ConsultationForm() {
               </div>
             </div>
 
-            {/* Radio Buttons */}
-            <div>
-              <label className="block text-gray-900 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
-                Prisonholder
-              </label>
-              <div className="flex gap-6 sm:gap-8">
-                <label className="flex items-center gap-2 sm:gap-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="prisonholder"
-                    value="Yes"
-                    checked={formData.prisonholder === "Yes"}
-                    onChange={handleInputChange}
-                    className="w-4 h-4 text-blue-600"
-                  />
-                  <span className="text-sm sm:text-base">Yes</span>
-                </label>
-                <label className="flex items-center gap-2 sm:gap-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="prisonholder"
-                    value="No"
-                    checked={formData.prisonholder === "No"}
-                    onChange={handleInputChange}
-                    className="w-4 h-4 text-blue-600"
-                  />
-                  <span className="text-sm sm:text-base">No</span>
-                </label>
-              </div>
-            </div>
-
-            {/* Radio Buttons */}
-            <div>
-              <label className="block text-gray-900 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
-                Prisonholder
-              </label>
-              <div className="flex gap-6 sm:gap-8">
-                <label className="flex items-center gap-2 sm:gap-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="prisonholder"
-                    value="Yes"
-                    checked={formData.prisonholder === "Yes"}
-                    onChange={handleInputChange}
-                    className="w-4 h-4 text-blue-600"
-                  />
-                  <span className="text-sm sm:text-base">Yes</span>
-                </label>
-                <label className="flex items-center gap-2 sm:gap-3 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="prisonholder"
-                    value="No"
-                    checked={formData.prisonholder === "No"}
-                    onChange={handleInputChange}
-                    className="w-4 h-4 text-blue-600"
-                  />
-                  <span className="text-sm sm:text-base">No</span>
-                </label>
-              </div>
-            </div>
+        
 
             {/* Medical History */}
             <div>
