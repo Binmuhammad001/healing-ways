@@ -28,7 +28,7 @@ export default function Section8() {
               Connecting people or medically challenged individuals to the right hospitals both locally and internationally 
               to receive the best possible care geared towards restoring health.
             </p>
-            <button onClick={handlBookConsultation} className="bg-blue-600 hover:bg-blue-700 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-md font-medium text-sm sm:text-base transition-colors">
+            <button onClick={handleBookConsultation} className="bg-blue-600 hover:bg-blue-700 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-md font-medium text-sm sm:text-base transition-colors">
               Book a consultation
             </button>
           </div>
