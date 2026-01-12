@@ -9,6 +9,8 @@ export default function ConsultationForm() {
     service: '',
     country: '',
     medicalHistory: '',
+    password: '',
+    confirmPassword: '',
   });
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -52,6 +54,17 @@ export default function ConsultationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // Check if passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return;
+    }
+    
     const token = localStorage.getItem('token');
     if (!token) {
       setError('Please login first');
@@ -69,6 +82,7 @@ export default function ConsultationForm() {
       submissionData.append('service', formData.service);
       submissionData.append('country', formData.country);
       submissionData.append('medicalHistory', formData.medicalHistory);
+      submissionData.append('password', formData.password);
       
       uploadedFiles.forEach(file => {
         submissionData.append('medicalReports', file);
@@ -83,6 +97,8 @@ export default function ConsultationForm() {
           service: '',
           country: '',
           medicalHistory: '',
+          password: '',
+          confirmPassword: '',
         });
         setUploadedFiles([]);
 
@@ -316,6 +332,42 @@ export default function ConsultationForm() {
                 required
                 className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
               />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-gray-900 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
+                Password *
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                placeholder="Enter password (min. 6 characters)"
+                minLength="6"
+                required
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            {/* Confirm Password */}
+            <div>
+              <label className="block text-gray-900 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
+                Confirm Password *
+              </label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                placeholder="Confirm your password"
+                required
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                <p className="text-red-500 text-xs sm:text-sm mt-1">Passwords do not match</p>
+              )}
             </div>
 
             {/* File Upload */}
