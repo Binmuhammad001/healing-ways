@@ -117,45 +117,45 @@ export default function VerifyOTP() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col pt-12 sm:pt-20 pb-8 px-4 sm:px-6 overflow-hidden">
+    <div className="min-h-screen bg-gray-50 flex flex-col pt-8 sm:pt-12 pb-8 px-4 sm:px-6 overflow-x-hidden">
       {/* Header */}
-      <div className="text-center mb-8 sm:mb-12">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+      <div className="text-center mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
           Book a consultation
         </h1>
-        <p className="text-gray-600 text-sm sm:text-base">
+        <p className="text-gray-600 text-xs sm:text-sm md:text-base">
           Connecting people or medically challenged individuals to the right hospitals
         </p>
       </div>
 
       {/* Stepper */}
-      <div className="flex items-center justify-center mb-12 sm:mb-16 px-2">
-        <div className="flex items-center gap-2 sm:gap-4">
+      <div className="flex items-center justify-center mb-8 sm:mb-12 px-2 overflow-x-auto">
+        <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 whitespace-nowrap">
           {/* Step 1 */}
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm sm:text-base">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0">
               1
             </div>
             <span className="text-gray-700 font-medium text-xs sm:text-sm">Register</span>
           </div>
 
           {/* Line 1 */}
-          <div className="w-8 sm:w-16 h-0.5 bg-gray-300"></div>
+          <div className="w-6 sm:w-12 h-0.5 bg-gray-300 flex-shrink-0"></div>
 
           {/* Step 2 */}
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-gray-300 text-gray-600 flex items-center justify-center font-bold text-sm sm:text-base">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-gray-300 text-gray-600 flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0">
               2
             </div>
             <span className="text-gray-600 font-medium text-xs sm:text-sm">Confirm</span>
           </div>
 
           {/* Line 2 */}
-          <div className="w-8 sm:w-16 h-0.5 bg-gray-300"></div>
+          <div className="w-6 sm:w-12 h-0.5 bg-gray-300 flex-shrink-0"></div>
 
           {/* Step 3 */}
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-gray-300 text-gray-600 flex items-center justify-center font-bold text-sm sm:text-base">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-gray-300 text-gray-600 flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0">
               3
             </div>
             <span className="text-gray-600 font-medium text-xs sm:text-sm">Consultation</span>
@@ -164,23 +164,23 @@ export default function VerifyOTP() {
       </div>
 
       {/* Form Card */}
-      <div className="max-w-2xl mx-auto w-full bg-white rounded-lg p-8 sm:p-12 shadow-sm">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+      <div className="max-w-2xl mx-auto w-full bg-white rounded-lg p-6 sm:p-8 md:p-12 shadow-sm">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
           Verify email
         </h2>
-        <p className="text-gray-600 text-sm sm:text-base mb-8">
-          Enter the 6 digit OTP we sent to <span className="font-semibold">{email || "your email"}</span> to proceed with your password reset process
+        <p className="text-gray-600 text-xs sm:text-sm md:text-base mb-6 sm:mb-8">
+          Enter the 6 digit OTP we sent to <span className="font-semibold break-all">{email || "your email"}</span> to proceed with your password reset process
         </p>
 
         {/* Resend Link */}
-        <div className="mb-8">
-          <p className="text-gray-600 text-sm">
+        <div className="mb-6 sm:mb-8">
+          <p className="text-gray-600 text-xs sm:text-sm">
             Didn't get an email?{" "}
             <button
               type="button"
               onClick={handleResendOTP}
               disabled={resendLoading}
-              className="text-blue-600 hover:text-blue-700 font-semibold underline disabled:opacity-50"
+              className="bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 rounded px-3 sm:px-4 py-1.5 sm:py-2 inline-block text-xs sm:text-sm"
             >
               {resendLoading ? "Sending..." : "Resend OTP"}
             </button>
@@ -188,25 +188,25 @@ export default function VerifyOTP() {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-3 sm:px-4 py-2 sm:py-3 rounded-lg mb-6 text-xs sm:text-sm">
             {error}
           </div>
         )}
 
         {resendSuccess && (
-          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 text-sm">
+          <div className="bg-green-50 border border-green-200 text-green-700 px-3 sm:px-4 py-2 sm:py-3 rounded-lg mb-6 text-xs sm:text-sm">
             OTP has been resent successfully! Check your email.
           </div>
         )}
 
         <form onSubmit={handleVerify}>
           {/* Enter OTP Label */}
-          <label className="block text-gray-900 font-semibold mb-6 text-sm sm:text-base">
+          <label className="block text-gray-900 font-semibold mb-4 sm:mb-6 text-xs sm:text-sm md:text-base">
             Enter OTP
           </label>
 
           {/* OTP Inputs */}
-          <div className="flex justify-center gap-2 sm:gap-3 mb-8">
+          <div className="flex justify-center gap-1.5 sm:gap-2 md:gap-3 mb-6 sm:mb-8">
             {otp.map((digit, index) => (
               <input
                 key={index}
@@ -218,7 +218,7 @@ export default function VerifyOTP() {
                 onChange={(e) => handleOtpChange(e.target, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 onPaste={index === 0 ? handlePaste : undefined}
-                className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-gray-300 rounded-lg text-center text-xl sm:text-2xl font-bold text-gray-900 bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none transition-colors"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 border-2 border-gray-300 rounded-lg text-center text-lg sm:text-xl md:text-2xl font-bold text-gray-900 bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none transition-colors flex-shrink-0"
               />
             ))}
           </div>
@@ -227,7 +227,7 @@ export default function VerifyOTP() {
           <button
             type="submit"
             disabled={loading || otp.join('').length !== 6}
-            className="w-full bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full bg-blue-600 text-white py-2.5 sm:py-3 md:py-4 rounded-lg font-semibold text-sm sm:text-base md:text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {loading ? "Verifying..." : "Verify email"}
           </button>
