@@ -8,6 +8,7 @@ export default function ContactSalesForm() {
     lastName: '',
     email: '',
     phoneNumber: '',
+    countryCode: '+1',
     comments: '',
     country: ''
   });
@@ -50,6 +51,7 @@ export default function ContactSalesForm() {
           lastName: '',
           email: '',
           phoneNumber: '',
+          countryCode: '+1',
           comments: '',
           country: ''
         });
@@ -150,12 +152,15 @@ export default function ContactSalesForm() {
                 </label>
                 <div className="flex gap-2">
                   <select 
-                    className="px-3 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    name="countryCode"
+                    value={formData.countryCode}
+                    onChange={handleChange}
+                    className="px-3 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-gray-900"
                     disabled={loading}
                   >
-                    <option>🇺🇸 +1</option>
-                    <option>🇬🇧 +44</option>
-                    <option>🇳🇬 +234</option>
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+44">🇬🇧 +44</option>
+                    <option value="+234">🇳🇬 +234</option>
                   </select>
                   <input
                     type="tel"
