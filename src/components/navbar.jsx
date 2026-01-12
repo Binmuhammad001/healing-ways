@@ -174,7 +174,7 @@ export default function Navbar() {
   </svg>
   <span className="text-red-600">Logout</span>
 </button>
-    </div.
+    </div>
   )}
 </div>
             </>
