@@ -31,7 +31,7 @@ export default function Section8() {
               to receive the best possible care geared towards restoring health.
             </p>
             <button onClick={handleBookConsultation} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-md font-medium text-sm transition-colors">
-              Book a consultation
+              Book a consultation 
             </button>
           </div>
 
