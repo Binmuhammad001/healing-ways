@@ -127,7 +127,7 @@ export default function VerifyOTP() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center items-center px-4 pt-0 pb-10 sm:pt-10 sm:pb-10">
+<div className="min-h-screen bg-white flex flex-col justify-center items-center px-4 pt-2 pb-4 sm:pt-4 sm:pb-6">
       <div className="flex flex-col items-center w-full max-w-md">
         {/* Form Container */}
         <div className="w-full bg-white p-6 sm:p-8 rounded-lg">
