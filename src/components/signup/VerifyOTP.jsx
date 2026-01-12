@@ -127,7 +127,7 @@ export default function VerifyOTP() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center items-center px-4 py-8 sm:py-12">
+    <div className="min-h-screen bg-white flex flex-col justify-center items-center px-4 pt-16 pb-16 sm:pt-16 sm:pb-16">
       <div className="flex flex-col items-center w-full max-w-md">
         {/* Form Container */}
         <div className="w-full bg-white p-6 sm:p-8 rounded-lg">
