@@ -8,7 +8,6 @@ export default function ConsultationForm() {
   const [formData, setFormData] = useState({
     service: '',
     country: '',
-    prisonholder: 'No',
     medicalHistory: '',
   });
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -69,7 +68,6 @@ export default function ConsultationForm() {
       
       submissionData.append('service', formData.service);
       submissionData.append('country', formData.country);
-      submissionData.append('prisonholder', formData.prisonholder);
       submissionData.append('medicalHistory', formData.medicalHistory);
       
       uploadedFiles.forEach(file => {
@@ -84,7 +82,6 @@ export default function ConsultationForm() {
         setFormData({
           service: '',
           country: '',
-          prisonholder: 'No',
           medicalHistory: '',
         });
         setUploadedFiles([]);
@@ -117,7 +114,7 @@ export default function ConsultationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-16 pt-32 sm:py-8 px-4 sm:px-6">
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-8 px-4 sm:px-6">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
@@ -240,6 +237,37 @@ export default function ConsultationForm() {
                   <option value="south-africa">South Africa</option>
                 </select>
                 <ChevronDown className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+            </div>
+
+            {/* Radio Buttons */}
+            <div>
+              <label className="block text-gray-900 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
+                Prisonholder
+              </label>
+              <div className="flex gap-6 sm:gap-8">
+                <label className="flex items-center gap-2 sm:gap-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="prisonholder"
+                    value="Yes"
+                    checked={formData.prisonholder === "Yes"}
+                    onChange={handleInputChange}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm sm:text-base">Yes</span>
+                </label>
+                <label className="flex items-center gap-2 sm:gap-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="prisonholder"
+                    value="No"
+                    checked={formData.prisonholder === "No"}
+                    onChange={handleInputChange}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm sm:text-base">No</span>
+                </label>
               </div>
             </div>
 
