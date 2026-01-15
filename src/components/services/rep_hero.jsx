@@ -40,7 +40,7 @@ export default function HeroSection() {
           </h1>
           
           <p className="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed max-w-xl mx-auto md:mx-0">
-           Connecting patients to the right hospitals, and doctors worldwide to receive the best possible care geared towards restoring health and hope ,
+           Connecting patients to the right hospitals, and doctors worldwide to receive the best possible care geared towards restoring health and hope,
            To be reborn and thrive even better 
           </p>
           
