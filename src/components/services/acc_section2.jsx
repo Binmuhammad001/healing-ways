@@ -64,9 +64,7 @@ export default function HotelAccommodationSection() {
             Experience Affordable, World-Class Medical Care
           </h2>
           <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
-            We are committed to making your medical tourism journey a success,
-            from initial consultation to post-treatment follow-up. Let us help
-            you achieve your healthcare goals comfortably.
+           We assist our patients with accommodations near hospitals, travel arrangements, and other logistics to ensure patients have a comfortable and stress-free experience.
           </p>
         </div>
 
