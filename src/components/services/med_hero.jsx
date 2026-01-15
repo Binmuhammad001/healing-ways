@@ -33,11 +33,8 @@ export default function HeroSection() {
           <p className="text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed py-2">
             Medical tourism
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-snug md:leading-tight text-white">
-            We use half the space we build
-          </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed mb-6">
-            Connecting people or medically challenged individuals to the right hospitals, both locally and internationally, to receive the best possible care.
+           We provide full support for medical tourism, connecting patients to hospitals abroad and handling logistics, consultations, and treatment plans for a seamless experience.
           </p>
           
           <div>
