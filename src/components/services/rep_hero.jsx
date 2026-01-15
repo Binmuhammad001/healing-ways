@@ -15,7 +15,7 @@ export default function HeroSection() {
     }
   };
   return (
-    <section className="relative min-h-[75vh] sm:min-h-[80vh] md:min-h-[85vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[75vh] sm:min-h-[80vh] md:min-h-[85vh] flex items-center overflow-hidden pt-12">
       
       {/* Background */}
       <div className="absolute inset-0">
