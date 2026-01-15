@@ -7,7 +7,7 @@ export default function ServicesSection() {
       icon: <FileText className="w-6 h-6 sm:w-8 sm:h-8" />,
       title: "Medical Report Translation",
       description:
-        "We help patients translate their medical documents for local or international use to ensure smooth treatment processes and accurate communication with medical professionals."
+        "Medical reports are one of the most important part of the whole process, The reports helps us understand or at least have an idea of the patient diagnosis With that we can identify the best doctor for that particular patient to ensure smooth treatment plan and process, accurate communication with the medical professionals."
     },
     {
       icon: <Plane className="w-6 h-6 sm:w-8 sm:h-8" />,
@@ -19,7 +19,7 @@ export default function ServicesSection() {
       icon: <Building className="w-6 h-6 sm:w-8 sm:h-8" />,
       title: "Accommodation and Logistics",
       description:
-        "We assist with hospital accommodations, travel arrangements, and other logistics to ensure patients have a comfortable and stress-free experience."
+        "We assist our patients with accommodations near hospitals, travel arrangements, and other logistics to ensure patients have a comfortable and stress-free experience."
     }
   ];
 
@@ -33,8 +33,8 @@ export default function ServicesSection() {
             Our Services
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-           Connecting patients to the right hospitals, and doctors worldwide to receive the best possible care geared towards restoring health and hope ,
-            To be reborn and thrive even better 
+          Connecting patients to the right hospitals, and doctors worldwide to receive the best possible care geared towards restoring health and hope,
+          To be reborn and thrive even better 
           </p>
         </div>
 
