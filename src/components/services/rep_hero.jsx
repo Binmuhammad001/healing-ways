@@ -34,6 +34,10 @@ export default function HeroSection() {
           <p className="text-xs sm:text-sm md:text-base text-gray-100 uppercase tracking-wider font-medium">
             Medical report translation
           </p>
+
+           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+            Medical Reports and Translation if needed 
+          </h1>
           
           <p className="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed max-w-xl mx-auto md:mx-0">
            Medical reports are one of the most important part of the whole process 
