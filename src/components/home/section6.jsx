@@ -26,9 +26,7 @@ export default function Section6() {
             Why choose us
           </h2>
           <p className="text-gray-700 text-sm sm:text-base max-w-2xl mx-auto">
-            Connecting people or medically challenged individuals to the right
-            hospitals both locally and internationally to receive the best
-            possible care.
+            We offer comprehensive, seamless support, bridging gaps between patients and top accredited hospitals for cost-effective, high-quality care, offering personalized packages, cultural comfort, and end-to-end assistance from travel logistics to post-treatment follow-up, ensuring a stress-free journey focused on recovery. We guaranty access to world-class doctors, advanced technology, and significant cost savings compared to other countries, all while enjoying cultural experiences. 
           </p>
         </div>
 
