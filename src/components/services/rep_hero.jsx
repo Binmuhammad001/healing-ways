@@ -36,13 +36,14 @@ export default function HeroSection() {
           </p>
           
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-snug">
-            We use half the space we build
+            Medical Reports and Translation if needed 
           </h1>
           
           <p className="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed max-w-xl mx-auto md:mx-0">
-           Connecting patients to the right hospitals, and doctors worldwide to receive the best possible care geared towards restoring health and hope,
-           To be reborn and thrive even better 
-          </p>
+           Medical reports are one of the most important part of the whole process 
+            The reports helps us understand or at least have an idea of the patient diagnosis 
+            With that we can identify the best doctor for  that particular patient to ensure smooth treatment plan and process, accurate communication with the medical professionals.
+                      </p>
           
           <div className="pt-2 flex justify-center md:justify-start">
             <button onClick={handleBookConsultation} className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-md font-medium text-sm sm:text-base transition-all duration-200 shadow-lg hover:shadow-xl w-full sm:w-auto">
