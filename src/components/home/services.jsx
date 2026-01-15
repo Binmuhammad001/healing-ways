@@ -33,7 +33,8 @@ export default function ServicesSection() {
             Our Services
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-            Connecting people or medically challenged individuals to the right hospitals locally and internationally to receive the best possible care.
+           Connecting patients to the right hospitals, and doctors worldwide to receive the best possible care geared towards restoring health and hope ,
+            To be reborn and thrive even better 
           </p>
         </div>
 
