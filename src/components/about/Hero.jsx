@@ -19,10 +19,11 @@ export default function HeroSection() {
       <div className="relative z-10 container mx-auto px-8 md:px-12 lg:px-16 max-w-7xl">
         <div className="max-w-2xl">
           <h2 className="text-4xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight text-white">
-            We use half the space we build
+            Who we are
           </h2>
           <p className="text-base md:text-lg text-gray-200 leading-relaxed">
-            Connecting people or medically challenged individuals to the<br/>right hospitals both locally and internationally to receive the<br/> best possible Connecting people or medically challenged
+            We are a premier medical consultancy firm dedicated to providing seamless access to top-tier healthcare solutions. With headquarters in India and a growing presence in Nigeria, Cameroon, and across Africa, we specialize in medical referrals, expert consultations, treatment coordination, and holistic wellness solutions.
+
           </p>
         </div>
       </div>
