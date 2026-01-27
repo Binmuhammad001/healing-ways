@@ -5,7 +5,7 @@ import Footer from '../components/footer';
 import Section1 from '../components/about/section1';
 import Section2 from '../components/about/section2';
 import Section3 from '../components/about/section3';
-import Section4 from '../components/abput/section4';
+import Section4 from '../components/about/section4';
 
 
 
