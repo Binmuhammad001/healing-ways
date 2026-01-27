@@ -15,7 +15,7 @@ export default function ServicesCardsSection() {
     },
     {
       icon: Stethoscope,
-      title: "Medical process",
+      title: "General Logistics",
       description: "We are committed to making your medical tourism journey a success, from initial consultation to post-treatment follow-up. Let us help you achieve your healthcare goals while exploring the world and expanding your horizons."
     }
   ];
