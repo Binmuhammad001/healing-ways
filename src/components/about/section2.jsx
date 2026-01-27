@@ -3,20 +3,20 @@ import React from 'react';
 export default function PrinciplesSection() {
   const principles = [
     {
-      title: "Question the standards",
-      description: "Connecting people or medically challenged individuals to the right hospitals both locally and internationally to receive the best possible Connecting people or medically challenged"
+      title: "Compassion",
+      description: "Demonstrating empathy and care towards individuals facing medical challenges, prioritizing their well-being and comfort throughout their healthcare journey."
     },
     {
-      title: "The details matter",
-      description: "Connecting people or medically challenged individuals to the right hospitals both locally and internationally to receive the best possible Connecting people or medically challenged"
+      title: "Integrity",
+      description: "Upholding honesty, transparency, and ethical standards in all interactions, ensuring trustworthiness and reliability for clients and stakeholders."
     },
     {
-      title: "Hiring is for everyone",
-      description: "Connecting people or medically challenged individuals to the right hospitals both locally and internationally to receive the best possible Connecting people or medically challenged"
+      title: "Excellence",
+      description: "Striving for the highest standards of quality and expertise in healthcare services, partnering with top hospitals and professionals to deliver optimal outcomes for clients."
     },
     {
-      title: "Start with simple",
-      description: "Connecting people or medically challenged individuals to the right hospitals both locally and internationally to receive the best possible Connecting people or medically challenged"
+      title: "Empowerment",
+      description: "Empowering individuals to make informed decisions about their health by providing them with knowledge, resources, and support, enabling them to take control of their healthcare journey."
     }
   ];
 
@@ -25,7 +25,7 @@ export default function PrinciplesSection() {
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         <div className="bg-[#F0F4FA] rounded-2xl shadow-sm p-8 md:p-12 lg:p-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10">
-            Our principles
+            Core Values
           </h2>
           
           <div className="grid md:grid-cols-2 gap-x-20 gap-y-10">
