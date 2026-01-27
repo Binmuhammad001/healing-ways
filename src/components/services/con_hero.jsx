@@ -42,7 +42,7 @@ export default function HeroSection() {
           
           <div>
             <button onClick={handleBookConsultation} className="bg-blue-600 hover:bg-blue-700 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-md font-medium text-sm sm:text-base transition-colors">
-              Book a medical report consult
+              Book a consultation
             </button>
           </div>
         </div>
