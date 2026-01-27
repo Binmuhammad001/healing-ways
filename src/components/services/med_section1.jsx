@@ -34,8 +34,7 @@ export default function Section3() {
             </h2>
 
             <p className="text-black mb-6 sm:mb-8 text-sm sm:text-base md:text-lg leading-relaxed">
-              We are committed to making your medical tourism journey a success, from initial consultation to post-treatment follow-up. 
-              Let us help you achieve your healthcare goals while exploring the world and expanding your horizons.
+             Actively serving patients in over 10+ Countries across the world
             </p>
 
             {/* Benefits List */}
