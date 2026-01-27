@@ -40,8 +40,8 @@ export default function HeroSection() {
           
           <div>
             <button onClick={handleBookConsultation} className="bg-blue-600 hover:bg-blue-700 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-md font-medium text-sm sm:text-base transition-colors flex items-center gap-2 mx-auto md:mx-0">
-              <span>→</span>
               Get Started
+               <span>→</span>
             </button>
           </div>
         </div>
