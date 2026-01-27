@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
-import Flags from '../../assets/flags.png';
+import Flags from '../../assets/new_flags.png';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
