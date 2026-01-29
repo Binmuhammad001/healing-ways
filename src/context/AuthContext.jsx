@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
       const response = await authAPI.login(credentials);
       
       if (response.data.success) {
-        const { token, user } = response.data.data;
+        const { token, user, redirectTo } = response.data.data;
         
         localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(user));
@@ -67,7 +67,12 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
         setIsAuthenticated(true);
         
-        return { success: true, user };
+        // Return redirectTo for role-based routing
+        return { 
+          success: true, 
+          user,
+          redirectTo: redirectTo || (user.role === 'admin' ? '/admin/dashboard' : '/dashboard')
+        };
       }
     } catch (error) {
       console.error('Login failed:', error);
@@ -113,7 +118,7 @@ export const AuthProvider = ({ children }) => {
       const response = await authAPI.verifyOTP(email, otp);
       
       if (response.data.success) {
-        const { token, user } = response.data.data;
+        const { token, user, redirectTo } = response.data.data;
         
         localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(user));
@@ -121,7 +126,12 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
         setIsAuthenticated(true);
         
-        return { success: true, user };
+        // Return redirectTo for role-based routing
+        return { 
+          success: true, 
+          user,
+          redirectTo: redirectTo || (user.role === 'admin' ? '/admin/dashboard' : '/dashboard')
+        };
       }
     } catch (error) {
       console.error('OTP verification failed:', error);
@@ -139,6 +149,20 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
+  // Role-based helper functions
+  const isAdmin = () => {
+    return user?.role === 'admin';
+  };
+
+  const isPatient = () => {
+    return user?.role === 'patient' || !user?.role; // Default to patient if no role
+  };
+
+  const getDefaultRoute = () => {
+    if (!isAuthenticated) return '/';
+    return isAdmin() ? '/admin/dashboard' : '/dashboard';
+  };
+
   const value = {
     user,
     isAuthenticated,
@@ -147,10 +171,13 @@ export const AuthProvider = ({ children }) => {
     register,
     verifyOTP,
     logout,
-    checkAuth
+    checkAuth,
+    // New role-based helpers
+    isAdmin,
+    isPatient,
+    getDefaultRoute
   };
 
-  // Don't show loading screen - just render children immediately
   return (
     <AuthContext.Provider value={value}>
       {children}
