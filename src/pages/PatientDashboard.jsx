@@ -1,5 +1,5 @@
 import React from 'react';
-import Pdash from '../components/dashboad/PatientDashboard';
+import Pdash from '../components/dashboard/PatientDashboard';
 
 
 
