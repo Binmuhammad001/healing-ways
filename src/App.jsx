@@ -17,8 +17,9 @@ import ConsultationForm from "./pages/consultation";
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
-// New Dashboard pages (you'll need to create these)
+// Dashboard pages
 import PatientDashboard from './pages/PatientDashboard';
+import MyConsultations from './pages/MyConsultations';
 import AdminDashboard from './pages/AdminDashboard';
 
 // Protected Route Component
@@ -126,6 +127,22 @@ function AppRoutes() {
           </ProtectedRoute>
         } 
       />
+      
+      {/* My Consultations - Patient only */}
+      <Route 
+        path="/my-consultations" 
+        element={
+          <ProtectedRoute>
+            {isAuthenticated && isAdmin() ? (
+              <Navigate to="/admin/dashboard" replace />
+            ) : (
+              <MyConsultations />
+            )}
+          </ProtectedRoute>
+        } 
+      />
+      
+      {/* Book Consultation - Protected route */}
       <Route 
         path="/consultation" 
         element={
