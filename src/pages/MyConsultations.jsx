@@ -30,11 +30,13 @@ const MyConsultations = () => {
 
   return (
     <DashboardLayout>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">My Consultations</h1>
-        <p className="text-gray-600 mt-2">View and manage all your consultation bookings</p>
+      {/* Page Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">My Consultations</h1>
+        <p className="text-gray-600">View and manage all your consultation bookings</p>
       </div>
 
+      {/* Consultations List Component */}
       <ConsultationsList
         consultations={consultations}
         loading={loading}
