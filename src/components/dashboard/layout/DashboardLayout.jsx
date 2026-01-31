@@ -10,17 +10,17 @@ const DashboardLayout = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
       {/* Main Content Area */}
-      <div className="lg:ml-64 flex flex-col min-h-screen">
+      <div className="lg:ml-64 flex flex-col min-h-screen bg-gray-50">
         {/* Top Navigation */}
         <TopNavigation toggleSidebar={toggleSidebar} />
 
         {/* Page Content */}
-        <main className="flex-1 p-4 lg:p-8">
+        <main className="flex-1 p-4 lg:p-8 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             {children}
           </div>
