@@ -12,7 +12,7 @@ import Acc_service from './pages/acc_service';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import BookConsultationForm from './components/signup/signup_form';
-import VerifyOTP from './pages/otp';
+import VerifyOTP from './pages/otp';  
 import ConsultationForm from "./pages/consultation";
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
