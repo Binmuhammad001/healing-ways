@@ -53,13 +53,13 @@ const TopNavigation = ({ toggleSidebar }) => {
   }, []);
 
   return (
-    <header className="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-4 lg:px-6 xl:px-8 sticky top-0 z-30 w-full">
+    <header className="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-8 sticky top-0 z-30 w-full">
       {/* Left Section - Menu Button & Search */}
-      <div className="flex items-center flex-1 min-w-0 mr-4">
+      <div className="flex items-center flex-1 min-w-0 mr-6">
         {/* Mobile Menu Toggle */}
         <button
           onClick={toggleSidebar}
-          className="lg:hidden mr-3 p-2 rounded-lg hover:bg-gray-100 transition-colors flex-shrink-0"
+          className="lg:hidden mr-4 p-2 rounded-lg hover:bg-gray-100 transition-colors flex-shrink-0"
           aria-label="Toggle menu"
         >
           <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,8 +87,8 @@ const TopNavigation = ({ toggleSidebar }) => {
         </div>
       </div>
 
-      {/* Right Section - Notifications & Profile */}
-      <div className="flex items-center space-x-2 flex-shrink-0">
+      {/* Right Section - Notifications & Profile with proper spacing */}
+      <div className="flex items-center space-x-3 flex-shrink-0">
         {/* Mobile Search Icon */}
         <button className="md:hidden p-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 transition-colors">
           <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@ const TopNavigation = ({ toggleSidebar }) => {
           </svg>
         </button>
 
-        {/* Notifications - Blue & White */}
+        {/* Notifications - Blue & White with proper spacing */}
         <div className="relative" ref={notificationRef}>
           <button
             onClick={() => setShowNotifications(!showNotifications)}
@@ -153,7 +153,7 @@ const TopNavigation = ({ toggleSidebar }) => {
         <div className="relative" ref={profileRef}>
           <button
             onClick={() => setShowProfile(!showProfile)}
-            className="flex items-center space-x-2 px-2 sm:px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors bg-white border border-gray-200"
+            className="flex items-center space-x-2.5 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors bg-white border border-gray-200"
           >
             <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
               <span className="text-white font-semibold text-sm">
