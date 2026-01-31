@@ -85,3 +85,78 @@ button:focus-visible {
 .animate-fadeIn {
   animation: fadeIn 0.2s ease-out;
 }
+
+/* Add this to your global CSS file (index.css or App.css) */
+
+/* Ensure no horizontal scroll on any screen size */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Prevent any element from causing horizontal scroll */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure main containers don't overflow */
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix for mobile devices */
+@media (max-width: 1024px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Ensure dropdowns don't cause overflow */
+.absolute {
+  max-width: calc(100vw - 2rem);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styling (optional but nice) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #f1f1f1;
+}
+
+/* Prevent text from overflowing */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Ensure images don't overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
