@@ -8,7 +8,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDashboardData();
+    fetchDashboardData(); 
   }, []);
 
   const fetchDashboardData = async () => {
