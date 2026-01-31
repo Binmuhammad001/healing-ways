@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext"; 
-
+ 
 // Existing pages
 import Home from "./pages/Home";
 import About from "./pages/About";
