@@ -10,7 +10,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const handleLogout = () => {
     logout();
     navigate('/login');
-  };
+  }; 
 
   // Patient Navigation Items
   const patientNavItems = [
