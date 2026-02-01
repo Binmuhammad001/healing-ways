@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { dashboardAPI } from '../services/api'; // ← Use dashboardAPI
+import { dashboardAPI } from '../components/services/api
 import DashboardLayout from '../components/dashboard/layout/DashboardLayout';
 import ConsultationsList from '../components/dashboard/patient/ConsultationsList';
+
+
 
 const MyConsultations = () => {
   const [consultations, setConsultations] = useState([]);
