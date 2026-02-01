@@ -75,19 +75,19 @@ export const authAPI = {
   resetPassword: (email, code, newPassword) => api.post('/api/auth/reset-password', { email, code, newPassword }),
   
   register: (userData) => {
-    return api.post('/api/auth/register', userData);
+    return api.post('/auth/register', userData);
   },
   verifyOTP: (email, otp) => {
-    return api.post('/api/auth/verify-otp', { email, otp });
+    return api.post('/auth/verify-otp', { email, otp });
   },
   resendOTP: (email) => {
-    return api.post('/api/auth/resend-otp', { email });
+    return api.post('/auth/resend-otp', { email });
   },
   login: (credentials) => {
-    return api.post('/api/auth/login', credentials);
+    return api.post('/auth/login', credentials);
   },
   getCurrentUser: () => {
-    return api.get('/api/auth/me');
+    return api.get('/auth/me');
   }
 };
 
