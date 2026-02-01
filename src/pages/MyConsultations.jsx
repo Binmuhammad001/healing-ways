@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { dashboardAPI } from '../services/api'; // ← Use dashboardAPI
 import DashboardLayout from '../components/dashboard/layout/DashboardLayout';
 import ConsultationsList from '../components/dashboard/patient/ConsultationsList';
 
@@ -15,9 +15,10 @@ const MyConsultations = () => {
   const fetchConsultations = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/dashboard/consultations?status=${filter}`
-      );
+      
+      // Use dashboardAPI
+      const response = await dashboardAPI.getConsultations(filter);
+      
       if (response.data.success) {
         setConsultations(response.data.data.consultations);
       }
@@ -30,13 +31,11 @@ const MyConsultations = () => {
 
   return (
     <DashboardLayout>
-      {/* Page Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">My Consultations</h1>
-        <p className="text-gray-600">View and manage all your consultation bookings</p>
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-800">My Consultations</h1>
+        <p className="text-gray-600 mt-2">View and manage all your consultation bookings</p>
       </div>
 
-      {/* Consultations List Component */}
       <ConsultationsList
         consultations={consultations}
         loading={loading}
