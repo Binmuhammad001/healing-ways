@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { dashboardAPI } from '../components/services/api';
 import { useAuth } from '../context/AuthContext';
 import DashboardLayout from '../components/dashboard/layout/DashboardLayout';
 import DashboardOverview from '../components/dashboard/patient/DashboardOverview';
@@ -15,7 +15,11 @@ const PatientDashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/dashboard/dashboard`);
+      setLoading(true);
+      
+      // Use dashboardAPI
+      const response = await dashboardAPI.getDashboard();
+      
       if (response.data.success) {
         setDashboardData(response.data.data);
       }
@@ -30,10 +34,7 @@ const PatientDashboard = () => {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center h-96">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading dashboard...</p>
-          </div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
       </DashboardLayout>
     );
@@ -49,5 +50,5 @@ const PatientDashboard = () => {
     </DashboardLayout>
   );
 };
-  
+
 export default PatientDashboard;
