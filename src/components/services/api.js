@@ -94,17 +94,17 @@ export const authAPI = {
 // CONSULTATION API
 export const consultationAPI = {
   bookConsultation: (formData) => {
-    return api.post('/api/consultations/book', formData, {
+    return api.post('/consultations/book', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
   },
   getMyConsultations: () => {
-    return api.get('/api/consultations/my-consultations');
+    return api.get('/consultations/my-consultations');
   },
   getConsultationById: (id) => {
-    return api.get(`/api/consultations/${id}`); // Fixed: was using template literal incorrectly
+    return api.get(`/consultations/${id}`); // Fixed: was using template literal incorrectly
   }
 };
 
@@ -114,23 +114,23 @@ export const dashboardAPI = {
     return api.get('/api/dashboard/dashboard');
   },
   getConsultations: (status = 'all') => {
-    return api.get(`/api/dashboard/consultations?status=${status}`);
+    return api.get(`/dashboard/consultations?status=${status}`);
   },
   getConsultationById: (id) => {
-    return api.get(`/api/dashboard/consultations/${id}`);
+    return api.get(`/dashboard/consultations/${id}`);
   },
   updateProfile: (profileData) => {
-    return api.patch('/api/dashboard/profile', profileData);
+    return api.patch('/dashboard/profile', profileData);
   },
   changePassword: (passwordData) => {
-    return api.patch('/api/dashboard/change-password', passwordData);
+    return api.patch('/dashboard/change-password', passwordData);
   }
 };
 
 // CONTACT API
 export const contactAPI = {
   submitContact: (contactData) => {
-    return api.post('/api/contact', contactData);
+    return api.post('/contact', contactData);
   }
 };
 
