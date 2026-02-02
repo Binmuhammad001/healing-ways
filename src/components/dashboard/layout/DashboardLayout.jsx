@@ -14,26 +14,28 @@ const DashboardLayout = ({ children }) => {
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-      {/* Main Content Area */}
-      <div className="lg:ml-64 flex flex-col min-h-screen bg-gray-50 w-full">
-        {/* Top Navigation */}
+      {/* Main Content Area - Offset by sidebar width */}
+      <div className="lg:ml-64 min-h-screen bg-gray-50 flex flex-col">
+        {/* Top Navigation - Full width within the offset area */}
         <TopNavigation toggleSidebar={toggleSidebar} />
 
         {/* Page Content - Centered with max-width */}
-        <main className="flex-1 px-4 sm:px-6 lg:px-8 py-8 bg-gray-50 w-full">
-          <div className="w-full max-w-[1400px] mx-auto">
+        <main className="flex-1 w-full">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
             {children}
           </div>
         </main>
 
-        {/* Footer */}
-        <footer className="bg-white border-t border-gray-200 py-4 px-4 sm:px-6 lg:px-8 w-full">
-          <div className="w-full max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between text-sm text-gray-600">
-            <p className="text-center md:text-left">© 2024 Healing Ways. All rights reserved.</p>
-            <div className="flex space-x-4 mt-2 md:mt-0">
-              <a href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</a>
-              <a href="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</a>
-              <a href="/contact" className="hover:text-blue-600 transition-colors">Contact</a>
+        {/* Footer - Centered with max-width */}
+        <footer className="bg-white border-t border-gray-200 w-full">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex flex-col md:flex-row items-center justify-between text-sm text-gray-600">
+              <p className="text-center md:text-left">© 2024 Healing Ways. All rights reserved.</p>
+              <div className="flex space-x-4 mt-2 md:mt-0">
+                <a href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</a>
+                <a href="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</a>
+                <a href="/contact" className="hover:text-blue-600 transition-colors">Contact</a>
+              </div>
             </div>
           </div>
         </footer>
