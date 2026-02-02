@@ -30,7 +30,7 @@ const DashboardLayout = ({ children }) => {
         <footer className="bg-white border-t border-gray-200 w-full">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex flex-col md:flex-row items-center justify-between text-sm text-gray-600">
-              <p className="text-center md:text-left">© 2024 Healing Ways. All rights reserved.</p>
+              <p className="text-center md:text-left">© 2026 Healing Ways. All rights reserved.</p>
               <div className="flex space-x-4 mt-2 md:mt-0">
                 <a href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</a>
                 <a href="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</a>
